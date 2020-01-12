@@ -120,7 +120,7 @@ header {
 	}
 
 	@media screen and (max-width: $tabWidth) and (min-width: $mobileWidth){
-		margin:0 40px;	
+		margin:0 20px;	
 		div.highlighter-rouge {
 			right: 40px;
 		}
@@ -130,7 +130,7 @@ header {
 	}
 
 	@media screen and (max-width: $desktopWidth) and (min-width: $tabWidth){
-		margin:0 80px;
+		margin:0 50px;
 		div.highlighter-rouge {
 			right: 80px;
 		}
@@ -140,7 +140,7 @@ header {
 	}
 
 	@media screen and (min-width: $desktopWidth) and (max-width: 1280px) {
-		margin:0 100px;
+		margin:0 70px;
 		div.highlighter-rouge {
 			right: 100px;
 		}
