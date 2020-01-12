@@ -18,7 +18,7 @@ texture:
   tagline: Developer. Designer
   date_format: "%b %-d, %Y"
   style: white
-  showNav: true
+  showNav: false
   showPicker: false
 
   # generate social links in footer
