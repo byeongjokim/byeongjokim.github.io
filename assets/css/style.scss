@@ -64,7 +64,9 @@
     padding-top: 120px;
     padding-bottom: 0px;
     color: #000;
-    a:hover {text-decoration: none;}
+    a:hover {
+		border-bottom: none;
+	}
     .social i {
         color: #000;
 
