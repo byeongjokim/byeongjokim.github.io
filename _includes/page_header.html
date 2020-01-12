@@ -20,9 +20,10 @@
 </div>
 
 <div class="container">
+	<br>
 	<ul class="category">
 		{% for category in site.categories %}
-		<li class=""><a href="#">{{category[0]}}</a></li>
+		<li class=""><a href="#">{{category | first}}</a></li>
 		{% endfor %}
 	</ul>
 </div>
