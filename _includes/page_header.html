@@ -23,7 +23,7 @@
 	<br>
 	<ul class="category">
 		{% for category in site.categories %}
-		<li class=""><a href="#">{{category | first}}</a></li>
+		<li class=""><a href="/categories/{{category | first}}">{{category | first}}</a></li>
 		{% endfor %}
 	</ul>
 </div>
