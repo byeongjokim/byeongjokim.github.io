@@ -49,6 +49,7 @@
     #black { background-color: #111; }
     #purple { background-color: rebeccapurple; }
     #green { background-color: mediumseagreen; }
+    #white { background-color: white; }
 }
 {%- endif -%}
 // Textures
@@ -57,6 +58,11 @@
 
     h2 {
         color: #999;
+    }
+}
+.texture-white {
+    h2 {
+        color: #111;
     }
 }
 
