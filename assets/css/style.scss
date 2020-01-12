@@ -62,7 +62,15 @@
 }
 .texture-white {
     header {
+        padding-top: 120px;
         color: #000;
+    }
+    .social i {
+        color: #000;
+
+        &:hover {
+            color: lighten(#000, 7%);
+        }
     }
 }
 
