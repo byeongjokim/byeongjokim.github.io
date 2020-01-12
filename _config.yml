@@ -19,7 +19,7 @@ texture:
   date_format: "%b %-d, %Y"
   style: white
   showNav: false
-  showPicker: true
+  showPicker: false
 
   # generate social links in footer
   social_links:
