@@ -13,9 +13,7 @@ layout: page
 			<div class="post-date"><i class="icon-calendar"></i>{{ post.date | date: date_format }}</div>
 		</div>
 		<div class="post">
-			{%- if site.show_excerpts -%}
 			{{ post.description }}
-			{%- endif -%}
 		</div>
 	</li>
 	{%- endfor -%}
