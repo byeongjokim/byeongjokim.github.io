@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Coding Post"
+title:  "Coding Post7"
 description: An example post which shows code rendering.
 date:   2019-03-23 21:03:36 +0530
 categories: Vision
