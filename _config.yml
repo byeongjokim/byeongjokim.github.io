@@ -14,7 +14,7 @@ sass:
 
 permalink: /posts/:title/
 texture:
-  title: Adam Denisov
+  title: BYEONGJO's RESEARCH BLOG
   tagline: Developer. Designer
   date_format: "%b %-d, %Y"
   style: white
