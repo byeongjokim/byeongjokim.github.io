@@ -9,7 +9,7 @@ ICCV 2019에 발표된 [논문](https://arxiv.org/pdf/1904.02689.pdf)이며, Off
 
 ## Task: instance segmentation
 
-## Background
+## Introduction
 
 ## Method
 ### A
