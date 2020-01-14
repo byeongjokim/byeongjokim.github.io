@@ -30,7 +30,7 @@ Segmentation에는 두 가지 세부문제가 있다. 동일한 클래스에 해
 저자는 위 두 task를 이용하면, 네트워크 스스로 **(시각적, 공간적, 의미적으로) 비슷한 instance**를 다르게 나타내는 **instance mask**가 잘 **localize** 될 수 있도록 학습 되어진다고 하였다. 
 
 ## Method
-![모델의 전체 구조](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/YOLACT/architecture.PNG)
+![모델의 전체 구조](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/YOLACT/architecture.PNG){: height="100%"}{: .center}
 
 one-stage object detection 모델에 feature localization step 없이 mask branch를 추가하기 위해서 instance segmentation task를 두 가지의 간단한 task로 병렬 처리 한다. 위 그림을 보면 Protonet과 Prediction Head로 각각 병렬 처리 되는 것을 알 수 있다.
 - FCN을 사용하여 instance에 의존하지 않은 image 크기의 **prototype masks** 생성하는 task
@@ -41,12 +41,12 @@ one-stage object detection 모델에 feature localization step 없이 mask branc
 저자는 masks는 공간적으로 일관성(spatially coherent)이 있기 때문에 위 방식을 선택했다고 한다. semantic한 결과를 얻을 수 있는 fc layer을 통해 mask coefficients를 예측하고, spatially coherent에 탁월한 conv layer을 통해 prototype masks를 생성하였다. 또한 두 결과물을 합칠때 생기는 계산량은 단순한 매트릭스 곱셈이기 때문에 빠르다.
 
 ### Prototype Generation
-![protonet의 구조](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/YOLACT/protonet.PNG)
+![protonet의 구조](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/YOLACT/protonet.PNG){: height="50%"}{: .center}
 
 
 
 ### Mask Coefficients
-![head의 구조](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/YOLACT/head.PNG)
+![head의 구조](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/YOLACT/head.PNG){: height="50%"}{: .center}
 
 
 
