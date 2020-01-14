@@ -5,7 +5,7 @@ description: Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do ei
 date:   2020-01-14 16:35:36 +0900
 categories: Paper
 ---
-ICCV 2019에 발표된 논문이며, Official Code는 PyTorch로 구현되어있다. ([Paper](https://arxiv.org/pdf/1904.02689.pdf) | [Code](https://github.com/dbolya/yolact))
+ICCV 2019에 발표된 논문이며, Official Code는 PyTorch로 구현되어있다. ([Paper](https://arxiv.org/pdf/1904.02689.pdf) || [Code](https://github.com/dbolya/yolact))
 
 ## Task: instance segmentation
 
