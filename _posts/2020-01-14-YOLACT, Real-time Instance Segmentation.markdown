@@ -15,7 +15,7 @@ Segmentation에는 두 가지 세부문제가 있다. 동일한 클래스에 해
 이 포스팅에서 소개하려는 논문 YOLACT는 instance segmentation 문제를 real-time으로 푸는 모델이다.
 
 ## Background
-`Boxes are stupid anyway though, I’m probably a true believer in masks except I can’t get YOLO to learn them - Joseph Redmon, YOLOv3`
+> Boxes are stupid anyway though, I’m probably a true believer in masks except I can’t get YOLO to learn them - Joseph Redmon, YOLOv3
 
 **Instance segmentation 문제를 real-time으로 해결할 수 없을까?** 라는 의문으로 시작이 된다. 여태까지의 instance segmentation 모델은 잘 만들어진 object detection에 병렬적으로 모델을 추가하여 (e.g., mask R-CNN(Faster R-CNN), FCIS(R-FCN) 발전하였다. instance segmentation은 매우 어려운 task이여서, object detection의 SSD 그리고 YOLO 모델과 같이 one-stage로 모델을 짜기 힘들기 때문이다. 위의 two-stage 모델은 mask를 생성하기 위해 **feature localization**에 많은 신경을 썼다 (e.g., RoI align). 하지만 feature localization 후 mask를 예측하는 모델은 순차적으로 이루어질 수 밖에 없고, 스피드를 올릴 수(accelerate)가 없어진다. FCIS는 이를 병렬적으로 수행하였지만 과도한 post-processing 때문에 real-time 과는 거리가 있다.
 
