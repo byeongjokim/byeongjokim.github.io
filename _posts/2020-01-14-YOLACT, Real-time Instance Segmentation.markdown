@@ -5,7 +5,7 @@ description: Instance segmentation 문제를 real-time으로 해결할 수 없�
 date:   2020-01-14 16:35:36 +0900
 categories: Paper
 ---
-ICCV 2019에 발표된 [논문](https://arxiv.org/pdf/1904.02689.pdf)이며, [Official Code](https://github.com/dbolya/yolact)는 pyTorch로 구현되어있다.
+ICCV 2019에 발표된 [논문](https://arxiv.org/pdf/1904.02689.pdf)이며, Official Code는 [pyTorch](https://github.com/dbolya/yolact)로 구현되어있다.
 
 ## Task: instance segmentation
 Image Segmentation은 이미지를 픽셀 단위의 다양한 segments로 분할하는 task이다. 쉽게 말하자면, **이미지의 모든 픽셀에 라벨을 할당하는** task이다. 
