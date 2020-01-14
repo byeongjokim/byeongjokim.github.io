@@ -32,7 +32,7 @@ Segmentation에는 두 가지 세부문제가 있다. 동일한 클래스에 해
 ## Method
 ![모델의 전체 구조](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/YOLACT/architecture.PNG){: width="100%"}
 
-one-stage object detection 모델에 feature localization step 없이 mask branch를 추가하기 위해서 instance segmentation task를 두 가지의 간단한 task로 병렬 처리 한다. 위 그림을 보면 Protonet과 Prediction Head로 각각 병렬 처리 되는 것을 알 수 있다.
+기본 모델은 one-stage object detection 모델인 RetinaNet을 사용하였다. 이 one-stage 모델에 feature localization step 없이 mask branch를 추가하기 위해서 instance segmentation task를 두 가지의 간단한 task로 병렬 처리 한다. 위 그림을 보면 Protonet과 Prediction Head로 각각 병렬 처리 되는 것을 알 수 있다.
 - FCN을 사용하여 instance에 의존하지 않은 image 크기의 **prototype masks** 생성하는 task
 - prototype 공간에서 instance의 정보를 가진 **mask coefficients**를 예측하기 위한 object detection task
 
@@ -42,6 +42,8 @@ one-stage object detection 모델에 feature localization step 없이 mask branc
 
 ### Prototype Generation
 ![protonet의 구조](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/YOLACT/protonet.PNG){: width="50%"}
+
+prototype masks를 생성하기 위해 FCN을 사용하였고, 최종 layer은 k 채널을 가지도록 하였다. 이로써 총 k개의 prototype masks를 생성한다. 
 
 
 
