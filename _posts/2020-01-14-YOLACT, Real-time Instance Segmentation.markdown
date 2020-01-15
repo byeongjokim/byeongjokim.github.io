@@ -43,13 +43,22 @@ Segmentation에는 두 가지 세부문제가 있다. 동일한 클래스에 해
 ### Prototype Generation
 ![protonet의 구조](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/YOLACT/protonet.PNG){: width="50%"}
 
-prototype masks를 생성하기 위해 FCN을 사용하였고, 최종 layer은 k 채널을 가지도록 하였다. 이로써 총 k개의 prototype masks를 생성한다. 
+prototype masks를 생성하기 위해 FCN을 사용하였고, 최종 layer은 k 채널을 가지도록 하였다. 이로써 총 k개의 prototype masks를 생성한다.
 
+P3인 경우 deep한 backbone의 featuremap이고, upsample을 하였기 때문에 조그마한 물체에도 좋은 성능을 내는 고 사양 masks를 얻을 수 있다. 마지막으로 ReLU activation function을 사용하여 background를 확실히 구분하였다.
 
 
 ### Mask Coefficients
 ![head의 구조](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/YOLACT/head.PNG){: width="50%"}
 
+기존 anchor box를 이용하여 object detect하는 모델들은 두 가지를 예측하였다.
+- c class confidences
+- x, y, w, h의 4 bounding box regressors
+
+이 논문에서는
+- k mask coefficients
+
+를 추가로 예측하여 각 prototype에 해당하는 정보를 가지고있다. 결국에는 한 anchor 당 4 + c + k 개의 값을 예측한다.
 
 
 ### Mask Assembly
