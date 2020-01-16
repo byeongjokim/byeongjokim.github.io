@@ -62,6 +62,25 @@ P3인 경우 deep한 backbone의 featuremap이고, upsample을 하였기 때문�
 
 
 ### Mask Assembly
+prototype masks에 mask coefficient를 계수로 사용해서 linear combination 한다.
+
+![Equ 1](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/YOLACT/equ1.PNG)
+
+위 수식에서, P는 prototype masks로 h x w x k 의 shape을 가지고 있다. C는 NMS와 score thresholding에서 살아남은 n개의 instance의 mask coefficients로 n x k 의 shape을 가지고 있다. 두 매트릭스를 matrix multiplication 후 sigmoid를 사용하면 최종 mask가 나온다.
+
+
+### Loss
+classification loss와 box regression loss는 [SSD](https://arxiv.org/abs/1512.02325)와 같은 방식으로 계산이 된다. 그리고 mask loss는 ground truth와 pixel-wise binary cross entropy(BCE)를 이용하여 계산이된다. 각각 loss에는 weight를 주었는데 classification loss, box regression loss, 그리고 mask loss 각각 1, 1.5, 그리고 6.125를 주었다. 즉 세 loss 중 mask loss에 많은 가중치를 주었다.
+
+최종 mask에서, evaluation 할 때에는 예측한 bounding box를 이용하여 crop한다. 반면에 training 일 때는 작은 object를 잘 보존하기 위해 ground truth bounding box를 이용하여 crop한다. 그리고 mask loss에 ground truth bounding box를 나누어 계산한다.
+
+
+### About Prototype
+Mask R-CNN 이나 FCIS인 경우 translation variance 하도록 신경을 많이 썼다. 저자는 crop 단계를 통해 이를 해결하였다고 한다. 하지만 crop 단계를 빼도 중간 크기 이상의 물체에는 translation variance 하다. 이를 통해 본 방법(YOLACT)이 다양한 prototype을 통해 instance의 위치를 잘 학습 할 수 있다고 주장한다.
+
+![prototype](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/YOLACT/prototype.PNG)
+
+이미지의 특정 부분을 activate 하기 위해 다양한 prototype을 사용하였다. 위 그림의 첫번째, 두번째, 그리고 세번째 prototype을 보면 각각 한 부분에 위치하는 물체만을 활성화 시키는 것을 알 수 있다. 이 세가지 prototype을 합치면, overlapping 되어있어도 다른 instance를 잘 구분 할 수 있다. 추가로 학습되어진 mask coefficient를 이용하여 이미지에 알맞은 maks를 생성하도록 적절하게 prototype을 압축시킬 수 있다. 실험을 했을 때 k=32 prototype을 써도 성능은 나빠지지 않았지만, coefficient를 예측하는게 쉬운일이 아니라 효과적이지 않다.
 
 
 ## Experiments
