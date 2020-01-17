@@ -82,22 +82,22 @@ Mask R-CNN 이나 FCIS인 경우 translation variance 하도록 신경을 많이
 이미지의 특정 부분을 activate 하기 위해 다양한 prototype을 사용하였다. 위 그림의 첫번째, 두번째, 그리고 세번째 prototype을 보면 각각 한 부분에 위치하는 물체만을 활성화 시키는 것을 알 수 있다. 이 세가지 prototype을 합치면, overlapping 되어있어도 다른 instance를 잘 구분 할 수 있다. 추가로 학습되어진 mask coefficient를 이용하여 이미지에 알맞은 maks를 생성하도록 적절하게 prototype을 압축시킬 수 있다. 실험을 했을 때 k=32 prototype을 써도 성능은 나빠지지 않았지만, coefficient를 예측하는게 쉬운일이 아니라 효과적이지 않다고 한다.
 
 ## Experiments
-![baseline](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/YOLACT/baseline.PNG){: width="50%"}
+![baseline](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/YOLACT/baseline.PNG){: width="80%"}
 
 위 그림을 통해 기존 두 방법에 비해 더 깔끔한 mask가 예측 되는 것을 알 수 있다.
 
 MS COCO와 Pascal 2012 SBD 데이터셋을 사용하여 실험하였다. 
 이번 paper review에서는 MS COCO 데이터로 실험한 결과에 대해서만 작성을 하겠다.
 
-![MSCOCO](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/YOLACT/mscoco.PNG){: width="50%"}
+![MSCOCO](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/YOLACT/mscoco.PNG){: width="80%"}
 
 위 표에서 YOLACT-550은 550 x 550 사이즈의 이미지를 인풋으로 가지는 모델이다. 이미지 사이즈가 커질 수록 AP는 높아지고 사이즈가 작아질 수록 fps가 커지는 것을 알 수 있다. 본 논문에서는 YOLACT-550을 기준으로 다른 baseline 모델과 비교를 보였다.
 
-![Fast NMS](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/YOLACT/fastnms_exp.PNG){: width="50%"}
+![Fast NMS](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/YOLACT/fastnms_exp.PNG){: width="30%"}
 
 논문에서는 Fast NMS에 대해서도 기술해놓았는데 이 부분은 생략하도록 하겠다. 다만 위 표를 보면 Fast NMS을 썼을 때 일반 NMS보다 성능은 조금 떨어지지만 약 12ms 빠르다고 한다.
 
-![prototypes](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/YOLACT/prototype_exp.PNG){: width="50%"}
+![prototypes](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/YOLACT/prototype_exp.PNG){: width="30%"}
 
 k(prototypes 개수)가 64일 때 AP가 최대를 기록하고, 8일 때 가장 빠르다. 하지만 두 성능을 생각했을 때 본 논문에서는 32를 선택하여 사용하였다고 한다.
 
