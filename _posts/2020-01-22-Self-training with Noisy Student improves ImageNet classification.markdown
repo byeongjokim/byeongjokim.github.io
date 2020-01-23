@@ -53,13 +53,13 @@ self-training framework를 사용하며, 총 세 가지 단계로 이루어져 �
 RandAugment을 통해 바뀐 이미지가 기존 이미지와 같은 label인 사실을 student가 알게된다. 이를 통해 더 어려운 이미지도 예측을 잘 할 수 있게 된다. dropout과 stochastic depth인 경우 ensemble과 같은 효과를 내게한다. 다시말하면 강력한 ensemble 효과를 흉내 낸다고 한다.
 
 ### Other Techniques
-#### data filtering
+**data filtering**:
 teacher model이 낮은 confidence로 예측하는 이미지는 대부분이 out-of-domain images 이기 때문에 filter 하였다.
 
-#### balancing
+**balancing**:
 ImgaeNet 데이터를 보면 각 class 마다 비슷한 개수의 labeled images가 있지만, unlabeled images에 대해서도 각 class 마다 이미지 개수의 balance를 맞춰줘야한다. 적은 데이터 개수의 class 이미지를 duplicate하여 늘렸고, 매우 많은 데이터 개수의 class 이미지 중 높은 confidence를 보이는 이미지만 사용한다.
 
-#### pseudo labels
+**pseudo labels**:
 위에서 언급했듯이 soft/hard labels 중 soft pseudo labels를 사용했을 때 out of domain unlabeled data에 대해 성능이 조금 더 좋다. 따라서 soft pseudo labels를 사용하여 실험하였다.
 
 ## Experiments
