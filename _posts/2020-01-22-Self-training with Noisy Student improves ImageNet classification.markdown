@@ -86,7 +86,9 @@ ImgaeNet 데이터를 보면 각 class 마다 비슷한 개수의 labeled images
 ### ImageNet Results
 ![ImageNet 실험 결과](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/self_training_noisy_student/imagenet_result.PNG)
 
-![ImageNet 실험 결과2](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/self_training_noisy_student/imagenet_result.PNG){: width="50%"}
+위 표는 ImageNet 2012 ILSVRC validation set accuracy이다. 이 논문에서 소개한 Noisy Student with EfficientNet-L2이 88.4% top-1 accuracy로 SOTA를 갱신하였다. 기존 EfficientNet-B7에 비해 3.4% 성능 개선을 하였다. 마찬가지로 같은 구조인 EfficientNet-L2에서 Noisy Student 방법의 추가로 2.9% 성능 개선을 하였다. 또한 tag로 labeling 된 Billion Instagram images를 사용한 SOTA 모델, FixRes ResNeXt-101 WSL에 비해 오직 300M의 unlabeled image을 사용하여 더 높은 성능을 기록하였다. parameter의 개수 또한 1/2 차이 난다.
+
+![ImageNet 실험 결과2](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/self_training_noisy_student/imagenet_result_2.PNG){: width="50%"}
 
 
 
