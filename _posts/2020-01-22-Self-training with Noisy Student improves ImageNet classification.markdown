@@ -63,6 +63,35 @@ ImgaeNet 데이터를 보면 각 class 마다 비슷한 개수의 labeled images
 위에서 언급했듯이 soft/hard labels 중 soft pseudo labels를 사용했을 때 out of domain unlabeled data에 대해 성능이 조금 더 좋다. 따라서 soft pseudo labels를 사용하여 실험하였다.
 
 ## Experiments
+### Details
+- dataset
+	- labeled dataset: ImageNet 2012 ILSVRC challenge
+    - unlabeled dataset: JFT 300M (data filtering과 balancing 적용)
+- Architecture
+	- EfficientNets
+    	- EfficientNet-B7
+        - EfficientNet-L2
+- Training
+- Noise
+	- stochastic depth: final layer에 0.8을 두고 다른 layer은 linear decay rule을 따르도록 한다.
+    - dropout: final classification layer에 0.5
+    - RandAugment: magnitude=27
+- Iterative training
+	- 3 iterations
+	- 1st teacher model: EfficientNet-B7
+    - 1st student model: EfficientNet-L2
+    - 2nd student model: EfficientNet-L2
+    - 3th student model: EfficientNet-L2
+
+### ImageNet Results
+![ImageNet 실험 결과](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/self_training_noisy_student/imagenet_result.PNG)
+
+![ImageNet 실험 결과2](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/self_training_noisy_student/imagenet_result.PNG){: width="50%"}
+
+
+
+### Robustness Results
+    
 
 ## Reference
 - https://blog.lunit.io/2018/03/22/distilling-the-knowledge-in-a-neural-network-nips-2014-workshop/
