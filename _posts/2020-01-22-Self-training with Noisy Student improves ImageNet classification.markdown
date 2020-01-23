@@ -86,14 +86,16 @@ ImgaeNet 데이터를 보면 각 class 마다 비슷한 개수의 labeled images
 ### ImageNet Results
 ![ImageNet 실험 결과](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/self_training_noisy_student/imagenet_result.PNG)
 
-위 표는 ImageNet 2012 ILSVRC validation set accuracy이다. 이 논문에서 소개한 Noisy Student with EfficientNet-L2이 88.4% top-1 accuracy로 SOTA를 갱신하였다. 기존 EfficientNet-B7에 비해 3.4% 성능 개선을 하였다. 마찬가지로 같은 구조인 EfficientNet-L2에서 Noisy Student 방법의 추가로 2.9% 성능 개선을 하였다. 또한 tag로 labeling 된 Billion Instagram images를 사용한 SOTA 모델, FixRes ResNeXt-101 WSL에 비해 오직 300M의 unlabeled image을 사용하여 더 높은 성능을 기록하였다. parameter의 개수 또한 1/2 차이 난다.
+위 표는 ImageNet 2012 ILSVRC validation set accuracy이다. 이 논문에서 소개한 Noisy Student(EfficientNet-L2)가 88.4% top-1 accuracy로 SOTA를 갱신하였다. 기존 EfficientNet-B7에 비해 3.4% 성능 개선을 하였다. 마찬가지로 같은 구조인 EfficientNet-L2에서 Noisy Student 방법의 추가로 2.9% 성능 개선을 하였다. 또한 tag로 labeling 된 Billion Instagram images를 사용한 SOTA 모델(FixRes ResNeXt-101 WSL)과 비교해보면, 오직 300M의 unlabeled image을 사용하여 더 높은 성능을 기록하였고 parameter의 개수 또한 1/2 차이 난다.
 
 ![ImageNet 실험 결과2](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/self_training_noisy_student/imagenet_result_2.PNG){: width="50%"}
 
-
+위 그래프는 Noisy Student가 기존 EfficientNet에 비해 효과가 있는지를 알아보기 위해, iterative training을 진행하지 않고 딱 한번의 student 학습을 진행하였을때의 성능을 나타낸 그래프이다. 이때 teacher와 student는 같은 모델로 학습하였다. EfficientNet-B0 부터 EfficientNet-B7 까지 모델의 크기를 다양하게 변화 시켰다. 또한 공정성을 위해 기존 baseline의 EfficientNet에 RandAugment를 적용 시켰다. 모든 모델 사이즈에 있어 약 0.8%의 성능이 향상되었고, 다른 모델들과 비교했을 때 파라미터 개수에 비해 성능이 월등히 높다. 그리고 또한 iterative training 없이도 어느정도 성과가 있는 것으로 확인됐다고 한다.
 
 ### Robustness Results
-    
+![Robustness 실험 결과](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/self_training_noisy_student/robustness.png)
+
+
 
 ## Reference
 - https://blog.lunit.io/2018/03/22/distilling-the-knowledge-in-a-neural-network-nips-2014-workshop/
