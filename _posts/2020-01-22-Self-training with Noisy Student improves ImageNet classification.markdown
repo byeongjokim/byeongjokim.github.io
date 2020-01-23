@@ -25,7 +25,7 @@ self-training framework를 사용하며, 총 세 가지 단계로 이루어져 �
 
 ## Method
 ### Self-training with Nosiy Student
-![알고리즘](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/self_training_noisy_student/algorithm.png)
+![알고리즘](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/self_training_noisy_student/algorithm.PNG)
 
 우선 labeled images와 cross entropy loss를 통해 teacher model을 학습한다. 그 후 학습된 teacher model을 이용하여 unlabeled images의 pseudo labels를 생성한다.
 
