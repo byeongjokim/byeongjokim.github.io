@@ -150,7 +150,7 @@ student 모델이 unlabeled images에 대해 학습 할 때 augmentation, stocha
 실험 결과: high-confidence images(in-domain unlabeled images)인 경우 soft pseudo labels과 hard pseudo labels 모두 좋은 성과를 냈다. 하지만 out-of-domain unlabeled images인 경우 soft pseudo labels은 여전히 꽤 좋은 성능을 냈지만 hard pseudo labels은 전혀 성과를 내지 못하였다. 단 teacher 모델이 더 큰 경우에는 hard pseudo labels도 꽤 좋은 성과를 냈기 때문에 상황에 맞춰 쓰면 될 것 이라고 한다.
 
 ### unlabeled batch size와 labeled batch size의 ratio
-![hard vs soft](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/self_training_noisy_student/batch_size_ratio.PNG){: width="50%"}
+![batch_size_ratio](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/self_training_noisy_student/batch_size_ratio.PNG){: width="50%"}
 
 130M개의 unlabeled images와 1.3M개의 labeled images를 사용하였기 때문에 batch size를 다르게 두었다. 저자는 unlabeled batch size를 좀 크게 두어 unlabeled data에 더 잘 학습되도록 하고 싶어서 비율을 차이나게 두었다고 한다.
 
