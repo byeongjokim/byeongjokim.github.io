@@ -73,6 +73,7 @@ ImgaeNet 데이터를 보면 각 class 마다 비슷한 개수의 labeled images
         - EfficientNet-L2
 - Training
 	- *here
+    - batch size 대해 (마지막만 28:1) 
 - Noise
 	- stochastic depth: final layer에 0.8을 두고 다른 layer은 linear decay rule을 따르도록 한다.
     - dropout: final classification layer에 0.5
@@ -80,9 +81,9 @@ ImgaeNet 데이터를 보면 각 class 마다 비슷한 개수의 labeled images
 - Iterative training
 	- 3 iterations
 	- 1st teacher model: EfficientNet-B7
-    - 1st student model: EfficientNet-L2
-    - 2nd student model: EfficientNet-L2
-    - 3th student model: EfficientNet-L2
+    - 1st student model: EfficientNet-L2 
+    - 2nd student model: EfficientNet-L2 
+    - 3th student model: EfficientNet-L2 
 
 ### ImageNet Results
 ![ImageNet 실험 결과](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/self_training_noisy_student/imagenet_result.PNG)
@@ -100,12 +101,47 @@ ImgaeNet 데이터를 보면 각 class 마다 비슷한 개수의 labeled images
 
 Robustness 측정을 위해 ImageNet-A, ImageNet-C, ImageNet-P을 이용하였다. ImageNet-A 데이터셋은 SOTA model들이 공통적으로 어려워하는 이미지들을 모은 데이터셋이다. ImageNet-C와 ImageNet-P 데이터셋은 blurring, fogging, rotation, 그리고 scaling 등과 같은 이미지에 흔히 발생할 수 있는 Corruption과 perturbation이 적용된 데이터셋이다. 이러한 이미지들은 어려운 task(ImageNet-A)이며, 트레이닝 데이터와 다르기(ImageNet-C, ImageNet-P) 때문에 **robustness**를 측정하는데에 사용된다.
 
+# here
+- ImageNet-A
+- ImageNet-C
+- ImageNet-P
+
 위 표를 보면 알 수 있듯이 ImageNet-A의 top-1 accuracy를 61.0%로 부터 83.7% 까지 올렸다. ImageNet-C의 경우 mCE(mean corruption error)를 45.7 에서 28.3 까지 낮추었으며, ImageNet-P의 경우 mFR(mean flip rate)를 resolution에 따라 14.2와 12.2까지 낮추었다. 저자는 이 논문이 robustness 향상을 의도 하지 않았기 때문에 이러한 결과가 놀랍다고 한다.
 
 ### Adversarial Robustness Results
 ![Adversarial Robustness 결과](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/self_training_noisy_student/adversarial_robustness.PNG){: width="50%"}
 
 이번에는 Adversarial attack의 일종인 FGSM(Fast Gradient Sign Method)을 적용하였다. 이 실험에서도 저자는 이 모델이 Adversarial Robustness를 고려하지 않고 만들었지만 좋은 성능을 내는 것에 놀라워한다. 그래프를 보면 epsilon이 증가할 수록 더욱 큰 차이의 성능 개선을 하는 것을 알 수 있다.
+
+## Discussion
+이 논문에는 추가 설명과 appendix의 자료가 많았다. 이 중 중요한 부분만 설명하도록 한다.
+
+### Self-training에서 Noise에 대해
+위에서 말 했듯이 soft pseudo labels를 사용한다. 따라서 student 모델은 teacher 모델에 거의 같은 결과를 내도록 학습되어진다. 그렇다면, 어째서 student 모델이 teacher 모델을 뛰어넘을 수 있을까?
+
+student 모델이 unlabeled images에 대해 학습 할 때 augmentation, stochastic depth 그리고 dropout을 적용하지 않고, labeled images에 대해 학습할 때에만 적용을 하였다. 이렇게 하면 *unlabeled images에 noise의 영향*을 *labeled images의 overfitting 막는 영향*으로 부터 분리할 수 있다. 즉 unlabeled images에 noise를 주었을 때 혹은 주지 않았을 때를 중점적으로 비교하기 위해서 세팅을 하였다. 또한 pseudo labels 생성할 때의 teacher 모델에도 noise 관련 비교를 해보았다.
+
+![Noise에 대해](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/self_training_noisy_student/about_noise.PNG){: width="50%"}
+
+위 표를 보면 세 가지 noise가 성능을 아주 잘 높이고 있는 것을 알 수 있다. 노이즈를 적용한 *Noisy Student (B5)*와 *student w/o Aug* 모두 teacher(*EfficientNet-B5*)에 보다 높은 성능을 기록하였다. 반면에 noise를 제거한 *student w/o Aug, SD, Dropout*은 teacher에 비해 떨어진 성능을 기록하였다. 또한 선생으로써 pseudo labels을 생성할 때 노이즈를 집어 넣으면 student 때 보다 낮은 성능을 보인다고 하는데 이는 매우 지당한 결론이다.
+
+이 실험의 결론으로는 noise를 student 모델 학습 할때 사용하는 것은 pseudo labeled images에 대해 overfitting을 방지하는 결과를 낸다.
+
+### Iterative Trainng에 대해
+![Iterative에 대해](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/self_training_noisy_student/about_iterative_training.PNG){: width="50%"}
+
+위 표를 보면 첫 번째 iteration 일때는 87.6% 였지만 iteration이 진행 될 수록 높아져서, 마지막 iteration 일 때 88.4%를 달성한다.
+
+### hard pseudo-label vs soft pseudo-label
+![hard vs soft](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/self_training_noisy_student/hard_soft.PNG){: width="50%"}
+
+이 논문은 ImageNet의 성능을 높이기 위해 out-of-domain unlabeled data를 사용하였다. 이때 teacher의 confidence는 매우 좋은 지침서가 된다고 한다. 위 그래프에서 x 축은 confidence scores([p, p+0.1])에 속한 이미지를 뜻한다. confidence score가 클 수록 in-domain images, 작을 수록 out-of-domain images라 생각하면 된다.
+
+실험 결과: high-confidence images(in-domain unlabeled images)인 경우 soft pseudo labels과 hard pseudo labels 모두 좋은 성과를 냈다. 하지만 out-of-domain unlabeled images인 경우 soft pseudo labels은 여전히 꽤 좋은 성능을 냈지만 hard pseudo labels은 전혀 성과를 내지 못하였다. 단 teacher 모델이 더 큰 경우에는 hard pseudo labels도 꽤 좋은 성과를 냈기 때문에 상황에 맞춰 쓰면 될 것 이라고 한다.
+
+
+# here
+### unlabeled batch size와 labeled batch size의 ratio
 
 
 
