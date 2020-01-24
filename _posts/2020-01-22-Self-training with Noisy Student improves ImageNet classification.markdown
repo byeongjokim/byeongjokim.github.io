@@ -72,6 +72,7 @@ ImgaeNet 데이터를 보면 각 class 마다 비슷한 개수의 labeled images
     	- EfficientNet-B7
         - EfficientNet-L2
 - Training
+	- *here
 - Noise
 	- stochastic depth: final layer에 0.8을 두고 다른 layer은 linear decay rule을 따르도록 한다.
     - dropout: final classification layer에 0.5
@@ -94,6 +95,17 @@ ImgaeNet 데이터를 보면 각 class 마다 비슷한 개수의 labeled images
 
 ### Robustness Results
 ![Robustness 실험 결과](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/self_training_noisy_student/robustness.png)
+
+![Robustness 결과 예시](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/self_training_noisy_student/robustness_ex.PNG)
+
+Robustness 측정을 위해 ImageNet-A, ImageNet-C, ImageNet-P을 이용하였다. ImageNet-A 데이터셋은 SOTA model들이 공통적으로 어려워하는 이미지들을 모은 데이터셋이다. ImageNet-C와 ImageNet-P 데이터셋은 blurring, fogging, rotation, 그리고 scaling 등과 같은 이미지에 흔히 발생할 수 있는 Corruption과 perturbation이 적용된 데이터셋이다. 이러한 이미지들은 어려운 task(ImageNet-A)이며, 트레이닝 데이터와 다르기(ImageNet-C, ImageNet-P) 때문에 **robustness**를 측정하는데에 사용된다.
+
+위 표를 보면 알 수 있듯이 ImageNet-A의 top-1 accuracy를 61.0%로 부터 83.7% 까지 올렸다. ImageNet-C의 경우 mCE(mean corruption error)를 45.7 에서 28.3 까지 낮추었으며, ImageNet-P의 경우 mFR(mean flip rate)를 resolution에 따라 14.2와 12.2까지 낮추었다. 저자는 이 논문이 robustness 향상을 의도 하지 않았기 때문에 이러한 결과가 놀랍다고 한다.
+
+### Adversarial Robustness Results
+![Adversarial Robustness 결과](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/self_training_noisy_student/adversarial_robustness.PNG)
+
+이번에는 Adversarial attack의 일종인 FGSM(Fast Gradient Sign Method)을 적용하였다. 이 실험에서도 저자는 이 모델이 Adversarial Robustness를 고려하지 않고 만들었지만 좋은 성능을 내는 것에 놀라워한다. 그래프를 보면 epsilon이 증가할 수록 더욱 큰 차이의 성능 개선을 하는 것을 알 수 있다.
 
 
 
