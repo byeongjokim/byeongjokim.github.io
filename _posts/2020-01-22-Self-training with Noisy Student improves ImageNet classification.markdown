@@ -101,10 +101,19 @@ ImgaeNet 데이터를 보면 각 class 마다 비슷한 개수의 labeled images
 
 Robustness 측정을 위해 ImageNet-A, ImageNet-C, ImageNet-P을 이용하였다. ImageNet-A 데이터셋은 SOTA model들이 공통적으로 어려워하는 이미지들을 모은 데이터셋이다. ImageNet-C와 ImageNet-P 데이터셋은 blurring, fogging, rotation, 그리고 scaling 등과 같은 이미지에 흔히 발생할 수 있는 Corruption과 perturbation이 적용된 데이터셋이다. 이러한 이미지들은 어려운 task(ImageNet-A)이며, 트레이닝 데이터와 다르기(ImageNet-C, ImageNet-P) 때문에 **robustness**를 측정하는데에 사용된다.
 
-# here
 - ImageNet-A
+	- 200 classes의 이미지로 top-1 과 top-5 accuracy를 측정
 - ImageNet-C
+	- 15가지 corruption으로 실험
+    - 각 corruption 마다 5 noise level 
+	- mCE(mean corruption error)
+    	- AlexNet의 error rate를 baseline
+        - 15가지 corruption error rate의 평균
+        - AlexNet과 비교했을때 image noise에 얼마나 강한 모델인가
 - ImageNet-P
+	- mFR(mean flip rate)
+    	- 다른 perturbations 마다 flip probability의 평균
+        - flip probability: perturbation이 바뀔 때 top-1 prediction이 바뀔 확률
 
 위 표를 보면 알 수 있듯이 ImageNet-A의 top-1 accuracy를 61.0%로 부터 83.7% 까지 올렸다. ImageNet-C의 경우 mCE(mean corruption error)를 45.7 에서 28.3 까지 낮추었으며, ImageNet-P의 경우 mFR(mean flip rate)를 resolution에 따라 14.2와 12.2까지 낮추었다. 저자는 이 논문이 robustness 향상을 의도 하지 않았기 때문에 이러한 결과가 놀랍다고 한다.
 
@@ -139,10 +148,12 @@ student 모델이 unlabeled images에 대해 학습 할 때 augmentation, stocha
 
 실험 결과: high-confidence images(in-domain unlabeled images)인 경우 soft pseudo labels과 hard pseudo labels 모두 좋은 성과를 냈다. 하지만 out-of-domain unlabeled images인 경우 soft pseudo labels은 여전히 꽤 좋은 성능을 냈지만 hard pseudo labels은 전혀 성과를 내지 못하였다. 단 teacher 모델이 더 큰 경우에는 hard pseudo labels도 꽤 좋은 성과를 냈기 때문에 상황에 맞춰 쓰면 될 것 이라고 한다.
 
-
-# here
 ### unlabeled batch size와 labeled batch size의 ratio
+![hard vs soft](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/self_training_noisy_student/batch_size_ratio.PNG){: width="50%"}
 
+130M개의 unlabeled images와 1.3M개의 labeled images를 사용하였기 때문에 batch size를 다르게 두었다. 저자는 unlabeled batch size를 좀 크게 두어 unlabeled data에 더 잘 학습되도록 하고 싶어서 비율을 차이나게 두었다고 한다.
+
+위 표를 보면 모델의 크기가 클 수록 batch size ratio를 크게 줘야 성능 개선이 이루어진다고 한다.
 
 
 ## Reference
