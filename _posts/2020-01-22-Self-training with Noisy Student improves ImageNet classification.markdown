@@ -72,8 +72,11 @@ ImgaeNet 데이터를 보면 각 class 마다 비슷한 개수의 labeled images
     	- EfficientNet-B7
         - EfficientNet-L2
 - Training
-	- *here
-    - batch size 대해 (마지막만 28:1) 
+	- 큰 batch size 사용
+	- fixing the train-test resolution discrepancy
+    	- 350 epoch 동안 작은 resolution 사용
+        - 1.5 epoch 마다 unaugmented labeled images에 대해 큰 resolution으로 fine-tuning
+        - fine-tuning시에 shallow layer freeze
 - Noise
 	- stochastic depth: final layer에 0.8을 두고 다른 layer은 linear decay rule을 따르도록 한다.
     - dropout: final classification layer에 0.5
@@ -83,7 +86,11 @@ ImgaeNet 데이터를 보면 각 class 마다 비슷한 개수의 labeled images
 	- 1st teacher model: EfficientNet-B7
     - 1st student model: EfficientNet-L2 
     - 2nd student model: EfficientNet-L2 
-    - 3th student model: EfficientNet-L2 
+    - 3rd student model: EfficientNet-L2 
+    - batch size의 ratio (unlabeled batch size : labeled batch size)를 크게 두었다.
+    	- 1st student model -> 14:1
+        - 2nd student model -> 14:1
+        - 3rd student model -> 28:1
 
 ### ImageNet Results
 ![ImageNet 실험 결과](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/self_training_noisy_student/imagenet_result.PNG)
@@ -148,6 +155,7 @@ Teacher 모델을 EfficientNet-B0 부터 EfficientNet-B7로 바꾸면서 실험�
 ### Student Model의 크기
 ![student_cap](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/self_training_noisy_student/student_cap.PNG){: width="50%"}
 
+위 표를 보면 teacher model과 같은 size 이거나 조금 더 큰 size의 student model을 비교하였다. 모든 실험이 일관적이게, 같은 teacher이면 더 큰 student가 좋은 성능을 기록하였다. 따라서 student model의 크기가 성능에 있어 매우 중요하다.
 
 ### hard pseudo-label vs soft pseudo-label
 ![hard vs soft](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/self_training_noisy_student/hard_soft.PNG){: width="50%"}
