@@ -114,6 +114,7 @@ Robustness 측정을 위해 ImageNet-A, ImageNet-C, ImageNet-P을 이용하였�
 	- mFR(mean flip rate)
     	- 다른 perturbations 마다 flip probability의 평균
         - flip probability: perturbation이 바뀔 때 top-1 prediction이 바뀔 확률
+        - AlexNet의 flip probability를 baseline
 
 위 표를 보면 알 수 있듯이 ImageNet-A의 top-1 accuracy를 61.0%로 부터 83.7% 까지 올렸다. ImageNet-C의 경우 mCE(mean corruption error)를 45.7 에서 28.3 까지 낮추었으며, ImageNet-P의 경우 mFR(mean flip rate)를 resolution에 따라 14.2와 12.2까지 낮추었다. 저자는 이 논문이 robustness 향상을 의도 하지 않았기 때문에 이러한 결과가 놀랍다고 한다.
 
