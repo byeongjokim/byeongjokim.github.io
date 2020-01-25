@@ -65,37 +65,37 @@ ImgaeNet 데이터를 보면 각 class 마다 비슷한 개수의 labeled images
 ## Experiments
 ### Details
 - dataset
-	- labeled dataset: ImageNet 2012 ILSVRC challenge
-    - unlabeled dataset: JFT 300M (data filtering과 balancing 적용)
-    	- ImageNet으로 학습된 EfficientNet-B0를 이용
-        - confidence score > 0.3
-        - class 마다 130K images filter
-        - 130K images 보다 적을 시 duplicate randomly
-        - 결국 130M images로 student model 학습
+	* labeled dataset: ImageNet 2012 ILSVRC challenge
+    * unlabeled dataset: JFT 300M (data filtering과 balancing 적용)
+    	* ImageNet으로 학습된 EfficientNet-B0를 이용
+        * confidence score > 0.3
+        * class 마다 130K images filter
+        * 130K images 보다 적을 시 duplicate randomly
+        * 결국 130M images로 student model 학습
 - Architecture
-	- EfficientNets
-    	- EfficientNet-B7
-        - EfficientNet-L2
+	* EfficientNets
+    	* EfficientNet-B7
+        * EfficientNet-L2
 - Training
-	- 큰 batch size 사용
-	- fixing the train-test resolution discrepancy
-    	- 350 epoch 동안 작은 resolution 사용
-        - 1.5 epoch 마다 unaugmented labeled images에 대해 큰 resolution으로 fine-tuning
-        - fine-tuning시에 shallow layer freeze
+	* 큰 batch size 사용
+	* fixing the train-test resolution discrepancy
+    	* 350 epoch 동안 작은 resolution 사용
+        * 1.5 epoch 마다 unaugmented labeled images에 대해 큰 resolution으로 fine-tuning
+        * fine-tuning시에 shallow layer freeze
 - Noise
-	- stochastic depth: final layer에 0.8을 두고 다른 layer은 linear decay rule을 따르도록 한다.
-    - dropout: final classification layer에 0.5
-    - RandAugment: magnitude=27
+	* stochastic depth: final layer에 0.8을 두고 다른 layer은 linear decay rule을 따르도록 한다.
+    * dropout: final classification layer에 0.5
+    * RandAugment: magnitude=27
 - Iterative training
-	- 3 iterations
-	- 1st teacher model: EfficientNet-B7
-    - 1st student model: EfficientNet-L2 
-    - 2nd student model: EfficientNet-L2 
-    - 3rd student model: EfficientNet-L2 
-    - batch size의 ratio (unlabeled batch size : labeled batch size)를 크게 두었다.
-    	- 1st student model -> 14:1
-        - 2nd student model -> 14:1
-        - 3rd student model -> 28:1
+	* 3 iterations
+	* 1st teacher model: EfficientNet-B7
+    * 1st student model: EfficientNet-L2 
+    * 2nd student model: EfficientNet-L2 
+    * 3rd student model: EfficientNet-L2 
+    * batch size의 ratio (unlabeled batch size : labeled batch size)를 크게 두었다.
+    	* 1st student model -> 14:1
+        * 2nd student model -> 14:1
+        * 3rd student model -> 28:1
 
 ### ImageNet Results
 ![ImageNet 실험 결과](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/self_training_noisy_student/imagenet_result.PNG)
