@@ -80,7 +80,7 @@ ImgaeNet 데이터를 보면 각 class 마다 비슷한 개수의 labeled images
 	* 큰 batch size 사용
 	* fixing the train-test resolution discrepancy
     	* 350 epoch 동안 작은 resolution 사용
-        * 1.5 epoch 마다 unaugmented labeled images에 대해 큰 resolution으로 fine-tuning
+        * 그 후 1.5 epoch 동안 unaugmented labeled images에 대해 큰 resolution으로 fine-tuning
         * fine-tuning시에 shallow layer freeze
 - Noise
 	* stochastic depth: final layer에 0.8을 두고 다른 layer은 linear decay rule을 따르도록 한다.
