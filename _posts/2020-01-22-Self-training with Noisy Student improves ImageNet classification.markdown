@@ -67,6 +67,11 @@ ImgaeNet 데이터를 보면 각 class 마다 비슷한 개수의 labeled images
 - dataset
 	- labeled dataset: ImageNet 2012 ILSVRC challenge
     - unlabeled dataset: JFT 300M (data filtering과 balancing 적용)
+    	- ImageNet으로 학습된 EfficientNet-B0를 이용
+        - confidence score > 0.3
+        - class 마다 130K images filter
+        - 130K images 보다 적을 시 duplicate randomly
+        - 결국 130M images로 student model 학습
 - Architecture
 	- EfficientNets
     	- EfficientNet-B7
