@@ -155,6 +155,7 @@ student 모델이 unlabeled images에 대해 학습 할 때 augmentation, stocha
 위 표를 보면 첫 번째 iteration 일때는 87.6% 였지만 iteration이 진행 될 수록 높아져서, 마지막 iteration 일 때 88.4%를 달성한다.
 
 ### Teacher Model의 크기
+![teacher](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/self_training_noisy_student/teacher.PNG){: width="50%"}
 Teacher 모델을 EfficientNet-B0 부터 EfficientNet-B7로 바꾸면서 실험을 해본 결과, Teacher가 크면 클 수록 좋은 성능을 기록하였다.
 
 ### Student Model의 크기
