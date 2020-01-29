@@ -20,9 +20,6 @@ self-training framework를 사용하며, 총 세 가지 단계로 이루어져 �
 정리해서 모델을 요약하자면,
 >본인보다 똑똑한(equal-or-larger student model) 학생들(with noise)에게 본인도 확실하지 않은 어려운 공부(pseudo labeled images)와 확실한 공부(labeled images)를 시킨다. 학생들은 머리를 맞대며(ensemble 같은 효과) 청출어람 하고, 선생님이 되어 새로운 학생을 같은 방식으로 가르친다.
 
-## Background
-
-
 ## Method
 ### Self-training with Nosiy Student
 ![알고리즘](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/self_training_noisy_student/algorithm.PNG)
