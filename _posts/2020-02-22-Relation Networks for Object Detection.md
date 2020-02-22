@@ -28,9 +28,7 @@ categories: Paper
 
 ![equ:5](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/relation_networks_for_object_detection/equation_5.PNG){: width="40%"}
 
-위는 m object와 n object의 geometry feature를 이용하여 **geometry weight**를 구하는 식이다. 우선 각 geometry feature은 높은 차원으로 임베딩된다 (위 식의 EG). translation invariant, scale transformation 등을 위해 ![equ:2](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/relation_networks_for_object_detection/positional.PNG){: width="30%"} 로 바꾸어 계산한다. 그 후 Attention is all you need 에서 소개한 Positional Encoding을 이용하여 d_g 차원으로 임베딩 된다. 
-
-그 후 WG를 이용하여 scalar weight가 되고, ReLU function을 이용한다. ReLU를 거치는 이유는, 두 object 간의 geometric 관계이기 때문이다. 
+위는 m object와 n object의 geometry feature를 이용하여 **geometry weight**를 구하는 식이다. 우선 각 geometry feature은 높은 차원으로 임베딩된다 (위 식의 EG). translation invariant, scale transformation 등을 위해 ![equ:2](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/relation_networks_for_object_detection/positional.PNG){: width="30%"} 로 바꾸어 계산한다. 그 후 Attention is all you need 에서 소개한 Positional Encoding을 이용하여 d_g 차원으로 임베딩 된다. 그 후 WG를 이용하여 scalar weight가 되고, ReLU function을 이용한다. ReLU를 거치는 이유는, 두 object 간의 geometric 관계이기 때문이다. 
 
 ![equ:3](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/relation_networks_for_object_detection/equation_3.PNG){: width="40%"}
 
@@ -38,12 +36,28 @@ categories: Paper
 
 ![equ:2](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/relation_networks_for_object_detection/equation_2.PNG){: width="40%"}
 
-위 식을 이용하여 모든 object 간의 weight sum을 한다. 이를 통해 다른 object의 영향이 첨가된 새로운 relation feature를 얻을 수 있다. 
+위 식을 이용하여 모든 object 간의 weight sum을 한다. 이를 통해 다른 object의 영향이 첨가된 relation feature를 얻을 수 있다. 
 
 ![equ:2](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/relation_networks_for_object_detection/equation_6.PNG){: width="40%"}
 
-object relation module은 총 N_r개의 relation feature을 이용하였다. 즉 multi-head attention과 같이 다양한 relation feature들을 concat 하였다. 인풋과 아웃풋의 dimension을 맞추기 위해 각 relation feature은 appearance feature의 1/N_r 로 정하였다.
+object relation module은 총 N_r개의 relation feature을 이용하였다. 즉 multi-head attention과 같이 다양한 relation feature들을 concat 하였다. 인풋과 아웃풋의 dimension을 맞추기 위해 각 relation feature의 dimension은 appearance feature의 1/N_r 로 정하였다.
 
+각 object의 appearance feature의 차원을 d_f, key의 차원을 d_k로 두면, 파라미터 공간의 크기가 계산이된다.
+- W_K: d_k x d_f (d_f 차원(object m)을 d_k 차원으로 임베딩)
+- W_Q: d_k x d_f (d_f 차원(object n)을 d_k 차원으로 임베딩)
+- W_G: d_g (임베딩된 d_g차원을 scalar weight로 바꿈)
+- W_V: d_f x d_f/N_r (d_f 차원(object m)을 d_f/N_r(relation features))
+
+![parameters](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/relation_networks_for_object_detection/parameter.PNG){: width="40%"}
+따라서 총 N_r 개의 relation feature을 만들기 때문에 위 식이 성립된다. 본 논문에서는 N_r = 16, d_k = 64, d_g = 64 로 놓았고, N과 d_f는 수백으로 놓았다.
+
+**위 까지 포스팅을 쓰다보니.. 얼른 수식을 쓸 수 있게 블로그 손봐야겠다..**
+
+### Relation Networks
+
+
+#### Relation for Instance Recognition
+#### Relation for Duplicate Removal
 
 
 
