@@ -1,0 +1,35 @@
+---
+layout: post
+title:  "Relation Networks for Object Detection"
+description: 저자는 딥러닝이 유행하기 이전의 object relation을 이용하여 이 문제를 해결하고자 하였다. 그러나 보통 object는 각기 다른 위치, 다른 크기, 다른 종류 그리고 다른 이미지로 검출 되기 때문에 NLP에서 성공을 얻은 attention model (Attention is all you need)을 이용하였다.
+date:   2020-02-22 17:20:00 +0900
+categories: Paper
+---
+2018 CVPR에서 Oral로 발표된 논문이다. ([Paper](https://arxiv.org/pdf/1711.11575) || [Code](https://github.com/msracver/Relation-Networks-for-Object-Detection))
+
+## Introduction
+기존 object detection 모델들을 보면 각 proposal에 object classification과 bounding box regression이 개별적으로 이루어 졌다. 또한 non-maximum suprression (NMS)도 heuristic하게 post-processing step에서 시행되었다.
+
+저자는 딥러닝이 유행하기 이전의 object relation을 이용하여 이 문제를 해결하고자 하였다. 그러나 보통 object는 각기 다른 위치, 다른 크기, 다른 종류 그리고 다른 이미지로 검출 되기 때문에 object-object relation 모델을 만드는 것은 어렵다. 이때 저자는 NLP에서 성공을 얻은 attention model (Attention is all you need)에 영감을 받았다고 한다. 각기 다른 위치, 특징에 상관 없이 모든 elements 사이의 dependency를 모델화 시킬 수 있기 때문이다.
+
+본 논문에서 original weight와 geometric weight를 이용한 attention module을 제안한다. 기존 방식에 geometric weight를 추가로 사용한 이유는 object간의 상대적인 공간의 관계를 파악하기 위해서 라고 한다. 이 module은 **object relation module** 이라 한다.
+
+## Method
+### Object Relation Module
+기본 "Scaled Dot-Product Attention"의 과정을 기반으로 설계 되었다. Scaled Dot-Product Attention을 간략하게 설명하면, 쿼리 q와 key K의 요소간의 유사도를 계산하여 value V의 값을 변화 시키는 메커니즘이다. 계산된 유사도에 따라 V에 영향을 끼치는 정도가 달라지며, 이를 attention이라 생각하면 된다. V는 결국 관련 있는 요소들에 영향을 받아 값이 변한다.
+
+이제 object relation module에 대한 설명을 하겠다. 우선 각 object는 geometric feature와 appearance feature로 이루어져 있다. 당연히 geometric feature은 4-d 이며, appearance feature은 architecture 구조에 따라 달라진다. 
+
+![equ:2](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/relation_networks_for_object_detection/equation_2.PNG){: width="50%"}
+
+![equ:3](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/relation_networks_for_object_detection/equation_3.PNG){: width="50%"}
+
+![equ:4](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/relation_networks_for_object_detection/equation_4.PNG){: width="50%"}
+
+![equ:5](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/relation_networks_for_object_detection/equation_5.PNG){: width="50%"}
+
+### a
+
+## Experiments
+
+## Reference
