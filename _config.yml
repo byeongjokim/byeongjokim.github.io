@@ -20,6 +20,8 @@ texture:
   style: white
   showNav: false
   showPicker: false
+  useMathJax: true
+  enable_mathjax: true
 
   # generate social links in footer
   social_links:
