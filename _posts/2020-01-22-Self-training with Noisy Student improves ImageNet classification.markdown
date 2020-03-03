@@ -5,7 +5,7 @@ description: ImageNet에 속하지 않은 unlabeled images 까지 이용하여 I
 date:   2020-01-23 16:35:36 +0900
 categories: Paper
 ---
-2019년 11월, ImageNet 데이터셋에 대해 State-of-the-art를 갱신한 논문이다. ([Paper](https://arxiv.org/pdf/1911.04252.pdf))
+2019년 11월, ImageNet 데이터셋에 대해 State-of-the-art를 갱신한 논문이다. ([Arxiv](https://arxiv.org/abs/1911.04252))
 
 ## Introduction
 Image recognition(classification) 분야는 AlexNet, VGG, ResNet 부터 시작해서 NASNet 최근에는 EfficientNet 등 많은 연구가 진행되며 발전해왔다. 이 모델들은 supervised learning으로 큰 labeled images를 필요로 한다. 하지만 unlabeled images를 이용하지는 않았다. 이 논문은 ImageNet에 속하지 않은 unlabeled images 까지 이용하여 ImageNet 정확성의 SOTA를 갱신하며, robustness 성능 까지 높이는 방법에 대해 설명한다.

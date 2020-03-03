@@ -5,7 +5,7 @@ description: 저자는 딥러닝이 유행하기 이전의 object relation을 �
 date:   2020-02-22 17:20:00 +0900
 categories: Paper
 ---
-2018 CVPR에서 Oral로 발표된 논문이다. ([Paper](https://arxiv.org/pdf/1711.11575) || [Code](https://github.com/msracver/Relation-Networks-for-Object-Detection))
+2018 CVPR에서 Oral로 발표된 논문이다. ([Arxiv](https://arxiv.org/abs/1711.11575) || [Code](https://github.com/msracver/Relation-Networks-for-Object-Detection))
 
 ## Introduction
 기존 object detection 모델들을 보면 각 proposal에 object classification과 bounding box regression이 개별적으로 이루어 졌다. 또한 non-maximum suprression (NMS)도 heuristic하게 post-processing step에서 시행되었다.
