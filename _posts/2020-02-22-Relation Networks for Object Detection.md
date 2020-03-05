@@ -52,7 +52,7 @@ object relation module은 총 N_r개의 relation feature을 이용하였다. 즉
 
 따라서 총 N_r 개의 relation feature을 만들기 때문에 위 식이 성립된다. 본 논문에서는 N_r = 16, d_k = 64, d_g = 64 로 놓았고, N과 d_f는 수백으로 놓았다.
 
-**위 까지 포스팅을 쓰다보니.. 얼른 수식을 쓸 수 있게 블로그 손봐야겠다..**
+> 위 까지 포스팅을 쓰다보니.. 얼른 수식을 쓸 수 있게 블로그 손봐야겠다..
 
 ### Relation Networks
 대게의 object detection 모델은 총 4개의 단계로 이루어진다.
