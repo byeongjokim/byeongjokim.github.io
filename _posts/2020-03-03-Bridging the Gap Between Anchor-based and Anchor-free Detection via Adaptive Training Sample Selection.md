@@ -17,15 +17,12 @@ center-based detector은 anchor box 대신에 point를 이용하는 점에서 an
 - positive 또는 negative sample의 정의
 - regression starting status
 
-```
-논문에서는 위의 내용을 introduction 부터 설명을 하였지만, 뒤에 어떤 차이가 성능에 큰 영향을 미치는 지에 대한 실험을 포함한 반복적인 내용이 있기 때문에 뒤에 더 자세하게 설명을 하겠다.
-```
+> 논문에서는 위의 내용을 introduction 부터 설명을 하였지만, 뒤에 어떤 차이가 성능에 큰 영향을 미치는 지에 대한 실험을 포함한 반복적인 내용이 있기 때문에 뒤에 더 자세하게 설명을 하겠다.
 
 논문에서는 anchor-based와 anchor-free 방법의 차이를 실험적으로 설명하며, 성능의 차이는 **positive와 negative sample의 정의**에 있다고 하였다. 그리고 이에 object 특성에 따라 자동으로 positive, negative sample을 선택하는 **Adaptive Training Sample Selection (ATSS)**을 제안한다. ATSS로 State-of-the-art AP 50.7% 성능을 얻었으며, 이 방법을 이용하면 많은 anchor를 사용하지 않아도 된다고 한다.
 
-```
-본 리뷰를 정확히 이해하기 위해서는 anchor-based detector와 anchor-free detector에 기본적인 이해가 우선되어야할 것 같다. 밑 reference 부분에 각각 한 가지 모델 논문의 링크를 올려 놓았다.
-```
+> 본 리뷰를 정확히 이해하기 위해서는 anchor-based detector와 anchor-free detector에 기본적인 이해가 우선되어야할 것 같다. 밑 reference 부분에 각각 한 가지 모델 논문의 링크를 올려 놓았다.
+
 
 ## Method
 
