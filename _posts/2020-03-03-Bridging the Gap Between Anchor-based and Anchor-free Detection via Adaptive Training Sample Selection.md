@@ -19,7 +19,7 @@ center-based detector은 anchor box 대신에 point를 이용하는 점에서 an
 
 > 논문에서는 위의 내용을 introduction 부터 설명을 하였지만, 뒤에 어떤 차이가 성능에 큰 영향을 미치는 지에 대한 실험을 포함한 반복적인 내용이 있기 때문에 뒤에 더 자세하게 설명을 하겠다.
 
-논문에서는 anchor-based와 anchor-free 방법의 차이를 실험적으로 설명하며, 성능의 차이는 **positive와 negative sample의 정의**에 있다고 하였다. 그리고 이에 object 특성에 따라 자동으로 positive, negative sample을 선택하는 **Adaptive Training Sample Selection (ATSS)**을 제안한다. ATSS로 State-of-the-art AP 50.7% 성능을 얻었으며, 이 방법을 이용하면 많은 anchor를 사용하지 않아도 된다고 한다.
+논문에서는 anchor-based와 anchor-free 방법의 차이를 실험적으로 설명하며, 성능의 차이는 **positive와 negative sample의 정의**에 있다고 하였다. 그리고 이에 object 특성에 따라 자동으로 positive, negative sample을 선택하는 **Adaptive Training Sample Selection(ATSS)**을 제안한다. ATSS로 State-of-the-art AP 50.7% 성능을 얻었으며, 이 방법을 이용하면 많은 anchor를 사용하지 않아도 된다고 한다.
 
 > 본 리뷰를 정확히 이해하기 위해서는 anchor-based detector와 anchor-free detector에 기본적인 이해가 우선되어야할 것 같다. 밑 reference 부분에 각각 한 가지 모델 논문의 링크를 올려 놓았다.
 
@@ -27,7 +27,7 @@ center-based detector은 anchor box 대신에 point를 이용하는 점에서 an
 대표적인 anchor-based detector **RetinaNet**과 anchor-free detector **FCOS**를 비교 실험을 하였다. 각 모델의 논문은 하단에서 볼 수 있다. 위 세 가지 차이 중 두, 세번째 항목에 집중을 한 실험이다. 첫 번째 차이를 없애기 위해 RetinaNet의 location 당 anchor의 개수를 하나로 놓았다. 이로써 FCOS와 비슷한 모델이 완성된다. MS COCO Dataset으로 실험 하였으며 Training Detail과 Inference Detail은 논문을 참고하면 된다.
 
 ### Inconsistency Removal
-우선 anchor box가 하나인 RetinaNet (#A=1) 모델은 32.5% AP 성능을 얻었으며, FCOS 모델은 37.1% AP 성능을 얻었다. 또한 FCOS는 GIoU loss function과 normalizing 기법을 이용하여 37.8% AP 까지 성능을 올릴 수 있다. 하지만 이 비교(37.8% vs 32.5%)는 FCOS에서 사용된 여러 기법들(각 feature pyramid에 사용된 GIoU, GroupNorm, positive sample 제한, centerness branch, 그리고 trainalbe scalar)로 인해 제대로된 비교가 아니다(anchor-free와 anchor-based detector의 본질적인 차이가 아니기 때문에). 따라서 위 기법들을 RetinaNet에도 적용하여 implementation inconsistency를 없앴다.
+우선 anchor box가 하나인 RetinaNet(#A=1) 모델은 32.5% AP 성능을 얻었으며, FCOS 모델은 37.1% AP 성능을 얻었다. 또한 FCOS는 GIoU loss function과 normalizing 기법을 이용하여 37.8% AP 까지 성능을 올릴 수 있다. 하지만 이 비교(37.8% vs 32.5%)는 FCOS에서 사용된 여러 기법들(각 feature pyramid에 사용된 GIoU, GroupNorm, positive sample 제한, centerness branch, 그리고 trainalbe scalar)로 인해 제대로된 비교가 아니다(anchor-free와 anchor-based detector의 본질적인 차이가 아니기 때문에). 따라서 위 기법들을 RetinaNet에도 적용하여 implementation inconsistency를 없앴다.
 
 ![Tab:1](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/ATSS/Tab1.PNG){: width="60%"}
 
@@ -36,7 +36,17 @@ center-based detector은 anchor box 대신에 point를 이용하는 점에서 an
 > FCOS에 적용된 여러 기법들(각 feature pyramid에 사용된 GIoU, GroupNorm, positive sample 제한, centerness branch, 그리고 trainalbe scalar)을 RetinaNet에 적용해서 비교하는게 과연 **implementation inconsistency** 인지 의문이 들었다.
 
 ### Essential Difference
-에흉
+이제 RetinaNet(#A=1)과 FCOS에는 두 가지 차이만 존재한다.
+
+1. classification sub-task (positive와 negative sample 정의)
+2. regression sub-task (anchor box 또는 anchor point에서 시작되는 regression)
+
+#### Classification
+![Fig:1](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/ATSS/Fig1.PNG){: width="50%"}
+
+위 Figure 1을 보면 RetinaNet과 FCOS 모델이 positive, negative를 결정하는 대략적인 방법에 대해 알 수 있다.
+
+#### Regression
 
 ## Adaptive Training Sample Selection (ATSS)
 
