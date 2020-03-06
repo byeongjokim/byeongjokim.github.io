@@ -44,9 +44,16 @@ center-based detector은 anchor box 대신에 point를 이용하는 점에서 an
 #### Classification
 ![Fig:1](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/ATSS/Fig1.PNG){: width="50%"}
 
-위 Figure 1을 보면 RetinaNet과 FCOS 모델이 positive, negative를 결정하는 대략적인 방법에 대해 알 수 있다.
+위 Figure 1을 보면 RetinaNet과 FCOS 모델이 positive, negative를 결정하는 대략적인 방법에 대해 알 수 있다. 우선 RetinaNet의 경우 IoU을 이용하여 anchor box를 positive 혹은 negative로 구분한다. IoU가 특정 threshold를 넘지 못하면 학습 단계에서 무시된다. 반면에 FCOS의 경우 spatial constraint, scale constraint를 이용하여 anchor point를 구분한다. ground truth box 안에 있는 anchor point를 positive sample의 후보로 생각을한 후, 미리 정의된 scale range를 통해 최종 positive sample을 결정한다. 이때 선택되지 않은 anchor point는 negative sample 이다.
+
+![Tab:2](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/ATSS/Tab2.PNG){: width="50%"}
+
+FCOS는 spatial로 후보를 정하고, scale로 선택을 하는 반면 RetinaNet은 IoU를 통해 spatial, scale을 한번에 고려한다. 이 차이는 성능으로 이어진다. 위 표를 보면 RetinaNet(#A=1) (첫 번째 column)에서 IoU 대신 spatial, scale constraint 방식을 사용하니 성능 향상 되는 것을 볼 수 있다. 반대로 FCOS에 IoU 기법을 적용하면 성능이 떨어지는 것을 알 수 있다. 이 부분이 anchor-based와 anchor-free의 본질적인 차이 중 하나이다.
+
+> 위 부분이 어떻게 두 방식의 차이인지 이해가 잘 되지 않는다. anchor을 사용하든(anchor-based) 다른 방식(anchor-free)을 사용하든 spatial, scale constraint 기법 유무의 차이가 아닐까? 라고 생각이 들 수 있다. 하지만 multiple anchor에 spatial, scale constraint 기법을 사용하는 것은 single anchor에 spatial, scale constraint을 사용하는 것과 다름이 없고, 이는 FCOS 방법과 다름이 없다. single point에 spatial, scale constraint을 사용하기 때문에 anchor-free가 가능한 것이다.
 
 #### Regression
+
 
 ## Adaptive Training Sample Selection (ATSS)
 
