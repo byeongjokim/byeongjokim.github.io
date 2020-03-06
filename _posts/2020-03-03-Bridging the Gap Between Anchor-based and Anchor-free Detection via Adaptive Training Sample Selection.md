@@ -60,6 +60,7 @@ FCOS는 spatial로 후보를 정하고, scale로 선택을 하는 반면 RetinaN
 **결론은 positive sampe, negative sample을 정의하는 방법이 가장 중요하다.**
 
 ## Adaptive Training Sample Selection (ATSS)
+위의 결론을 토대로 *how to define positive and negative training samples* 에 대해 Adaptive Training Sample Selection을 제안한다. 이 방법은 hyperparameter 없이 robust 하다고한다.
 
 ## Conclusion
 
