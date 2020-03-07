@@ -68,7 +68,10 @@ FCOS는 spatial로 후보를 정하고, scale로 선택을 하는 반면 RetinaN
     - $g$의 center 그리고 anchor box의 center와의 L2 distance 이용
 2. ㅁ
 
-
+$$
+a = 1
+$$
+$a=1$
 
 ## Conclusion
 
