@@ -71,7 +71,7 @@ FCOS는 spatial로 후보를 정하고, scale로 선택을 하는 반면 RetinaN
 $$
 a = 1
 $$
-$a=1$
+$$a=1$$는 가나다
 
 ## Conclusion
 
