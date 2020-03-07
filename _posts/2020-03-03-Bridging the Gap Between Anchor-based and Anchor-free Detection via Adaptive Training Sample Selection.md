@@ -61,6 +61,8 @@ FCOS는 spatial로 후보를 정하고, scale로 선택을 하는 반면 RetinaN
 **결론은 positive sampe, negative sample을 정의하는 방법이 가장 중요하다.**
 
 ## Adaptive Training Sample Selection (ATSS)
+
+### Algorithm
 ![Algo:1](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/ATSS/Algo1.PNG){: width="60%"}
 
 위의 결론을 토대로 *how to define positive and negative training samples* 에 대해 Adaptive Training Sample Selection을 제안한다. 이 방법은 hyperparameter 없이 robust 하다고한다. ATSS 방법은 위 알고리즘을 통해 알 수 있다. 
@@ -74,8 +76,33 @@ FCOS는 spatial로 후보를 정하고, scale로 선택을 하는 반면 RetinaN
     - positive sample의 center가 ground truth $$g$$안에 있는 경우에만 선택
     - threshold $$t_g = m_g + v_g$$
     - 하나의 anchor box가 여러 ground-truth box의 positive sample이 된다면, 가장 높은 IoU를 가진 쪽으로 선택된다.
-5. 전체 anchor box에서 positive sample로 선택 받지 못한 anchor들은 negative sample이 된다.
+5. 전체 anchor box에서 positive sample로 선택 받지 못한 anchor들은 negative sample이 된다. - (line 17)
 
+위 소개된 알고리즘에는 몇가지 특징이 있다.
+
+- anchor box와 object 사이의 center distance based 후보 선택
+    - RetinaNet과 FCOS 모두 object와 anchor box(또는 point) 중심의 거리가 가까울 때 좋은 검출이 이루어진다.
+    - 따라서 center distnace 기반으로 후보를 선택한다.
+- IoU threshold에 $$t_g = m_g + v_g$$를 사용
+    - $$m_g$$가 높으면 후보들이 high-quality이기 때문에 threshold 또한 높여야한다. 반대로 낮으면 low-quality이기 때문에 threshold를 낮게 줘야한다.
+    - $$v_g$$가 높으면 대부분의 pyramid level에서 검출이 가능하기 때문에 threshold를 높여야한다. 반대로 낮으면 특정 pyramid level에서만 검출이 가능하기 때문에 threshold를 낮춰야한다.
+- 최종 positive sample을 뽑을 때 중심이 object에 있어야 선택
+    - 중심이 object 밖에 있는 anchor은 좋지 않은 후보이기 때문에 학습할 때 제거 되어야한다.
+- hyperparameter-free
+    - 본 방법에는 hyperparameter가 $$k$$ 하나 밖에 없다.
+
+### Verification
+![Tab:3](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/ATSS/Tab3.PNG){: width="60%"}
+
+위 표를 보면 RetinaNet에 ATSS 기법을 적용할 때 더 좋은 성능을 내는 것을 확인 할 수 있다. 또한 ATSS 기법이 단순히 positive와 negative sample을 분류하는 기법이기 때문에 별다른 overhead 없이 cost-free 하다.
+
+FCOS에는 두 버젼으로 적용하였다. Center sampling 기법은 ATSS의 lite한 버전이다. 이는 FCOS의 positive sample 고르는 방식과 논문의 방식을 합친 버전이다.  하지만 여기에는 아직 scale range라는 hyperparameter가 존재해서 높은 성능 향상을 이루어 내지는 못했다. 반면 ATSS를 적용하면 표에서 볼 수 있듯이 높은 성능향상이 이루어졌다. ATSS 방법은 hyperparameter의 사용을 최소한으로 했기 때문에 여러 metric에서 모두 좋은 성능을 냈다.
+
+### Analysis
+
+### Comparison
+
+### Discussion
 
 ## Conclusion
 
