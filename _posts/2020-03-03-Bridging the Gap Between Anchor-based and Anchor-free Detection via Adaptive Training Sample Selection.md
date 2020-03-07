@@ -61,15 +61,20 @@ FCOS는 spatial로 후보를 정하고, scale로 선택을 하는 반면 RetinaN
 **결론은 positive sampe, negative sample을 정의하는 방법이 가장 중요하다.**
 
 ## Adaptive Training Sample Selection (ATSS)
+![Algo:1](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/ATSS/Algo1.PNG){: width="60%"}
+
 위의 결론을 토대로 *how to define positive and negative training samples* 에 대해 Adaptive Training Sample Selection을 제안한다. 이 방법은 hyperparameter 없이 robust 하다고한다. ATSS 방법은 위 알고리즘을 통해 알 수 있다. 
 
-1. 모든 ground-truth box $$g$$의 positive sample 후보를 정한다. (line 3 ~ 6 in Algorithm 1)
+1. ground-truth box $$g$$의 positive sample 후보를 정한다. - (line 3 ~ 6)
     - 각 pyramid level 마다 $$g$$와 가장 가까운 $$k$$개의 anchor box를 구한다.
     - $$g$$의 center 그리고 anchor box의 center와의 L2 distance 이용
-    - 결국 하나의 ground-truth box $$g$$는 $$k \times L$$개의 positive sample 후보가 생긴다.
-2. 각 ground truth $$g$$와 후보들간의 IoU를 계산한다. $$D_g$$
-3. $$D_g$$의 mean($$m_g$$)과 standard deviation($$v_g$$)을 구한다.
-
+    - 결국 하나의 ground-truth box $$g$$는 $$k \times L$$개의 positive sample 후보($$C_g$$)가 생긴다.
+2. ground truth $$g$$와 후보들($$C_g$$)간의 IoU를 계산한다. $$D_g$$ 그 후 mean($$m_g$$)과 standard deviation($$v_g$$)을 구한다. - (line 7 ~ 9)
+3. ground truth $$g$$와의 IoU가 특정 threshold 값 보다 큰 후보를 최종 positive sample($$P$$)로 선택한다. - (line 11 ~ 15)
+    - positive sample의 center가 ground truth $$g$$안에 있는 경우에만 선택
+    - threshold $$t_g = m_g + v_g$$
+    - 하나의 anchor box가 여러 ground-truth box의 positive sample이 된다면, 가장 높은 IoU를 가진 쪽으로 선택된다.
+5. 전체 anchor box에서 positive sample로 선택 받지 못한 anchor들은 negative sample이 된다.
 
 
 ## Conclusion
