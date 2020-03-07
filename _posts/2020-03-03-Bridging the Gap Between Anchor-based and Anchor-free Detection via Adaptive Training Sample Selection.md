@@ -63,15 +63,14 @@ FCOS는 spatial로 후보를 정하고, scale로 선택을 하는 반면 RetinaN
 ## Adaptive Training Sample Selection (ATSS)
 위의 결론을 토대로 *how to define positive and negative training samples* 에 대해 Adaptive Training Sample Selection을 제안한다. 이 방법은 hyperparameter 없이 robust 하다고한다. ATSS 방법은 위 알고리즘을 통해 알 수 있다. 
 
-1. 모든 ground-truth box $g$의 positive sample 후보를 정한다.
-    - 각 pyramid level 마다 $g$와 가장 가까운 $k$개의 anchor box를 구한다.
-    - $g$의 center 그리고 anchor box의 center와의 L2 distance 이용
-2. ㅁ
+1. 모든 ground-truth box $$g$$의 positive sample 후보를 정한다. (line 3 ~ 6 in Algorithm 1)
+    - 각 pyramid level 마다 $$g$$와 가장 가까운 $$k$$개의 anchor box를 구한다.
+    - $$g$$의 center 그리고 anchor box의 center와의 L2 distance 이용
+    - 결국 하나의 ground-truth box $$g$$는 $$k \times L$$개의 positive sample 후보가 생긴다.
+2. 각 ground truth $$g$$와 후보들간의 IoU를 계산한다. $$D_g$$
+3. $$D_g$$의 mean($$m_g$$)과 standard deviation($$v_g$$)을 구한다.
 
-$$
-a = 1
-$$
-$$a=1$$는 가나다
+
 
 ## Conclusion
 
