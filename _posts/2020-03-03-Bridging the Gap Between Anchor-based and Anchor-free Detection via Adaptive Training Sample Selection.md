@@ -4,6 +4,7 @@ title:  "Bridging the Gap Between Anchor-based and Anchor-free Detection via Ada
 description: 리뷰 작성 중 ... anchor-based와 anchor-free 방법의 차이를 실험적으로 설명하며, 성능의 차이는 positive와 negative sample의 정의에 있다고 하였다. 그리고 이에 object 특성에 따라 자동으로 positive, negative sample을 선택하는 Adaptive Training Sample Selection (ATSS)을 제안한다.
 date:   2020-03-03 20:03:00 +0900
 categories: Paper
+use_math: true
 ---
 2020 CVPR에서 발표될 논문이다. ([Arxiv](https://arxiv.org/abs/1912.02424) || [Code](https://github.com/sfzhang15/ATSS))
 
