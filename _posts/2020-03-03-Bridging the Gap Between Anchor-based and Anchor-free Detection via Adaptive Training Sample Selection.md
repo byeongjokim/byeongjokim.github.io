@@ -96,17 +96,27 @@ FCOS는 spatial로 후보를 정하고, scale로 선택을 하는 반면 RetinaN
 
 위 표를 보면 RetinaNet에 ATSS 기법을 적용할 때 더 좋은 성능을 내는 것을 확인 할 수 있다. 또한 ATSS 기법이 단순히 positive와 negative sample을 분류하는 기법이기 때문에 별다른 overhead 없이 cost-free 하다.
 
-FCOS에는 두 버젼으로 적용하였다. Center sampling 기법은 ATSS의 lite한 버전이다. 이는 FCOS의 positive sample 고르는 방식과 논문의 방식을 합친 버전이다.  하지만 여기에는 아직 scale range라는 hyperparameter가 존재해서 높은 성능 향상을 이루어 내지는 못했다. 반면 ATSS를 적용하면 표에서 볼 수 있듯이 높은 성능향상이 이루어졌다. ATSS 방법은 hyperparameter의 사용을 최소한으로 했기 때문에 여러 metric에서 모두 좋은 성능을 냈다.
+FCOS에는 두 버젼으로 적용하였다. Center sampling 기법은 ATSS의 lite한 버전이다. 이는 FCOS의 positive sample 고르는 방식과 본 논문의 방식을 합친 버전이다.  하지만 여기에는 아직 scale range라는 hyperparameter가 존재해서 높은 성능 향상을 이루어 내지는 못했다. 반면 ATSS를 적용하면 표에서 볼 수 있듯이 높은 성능향상이 이루어졌다. ATSS 방법은 hyperparameter의 사용을 최소한으로 했기 때문에 여러 metric에서 모두 좋은 성능을 냈다.
 
 ### Analysis
+![Tab:4](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/ATSS/Tab4.PNG){: width="60%"}
+
+본 논문에서는 단 한 가지의 hyperparameter을 사용한다. 바로 각 pyramid level에서 선택되어지는 positive sample 후보의 개수 $$k$$이다. 위 표를 보면, k를 3에서 19 까지 다양하게 변화시키며 실험을 하였다. $$k$$가 19인 경우 low-quality의 후보들이 선택되어 성능 감소가 있다. 마찬가지로 3인 경우, 매우 적은 후보만 추천되며 statistical 적으로 불안정하여(mean, standard deviation 사용 하였기 때문에), 성능 하락을 보인다. $$k$$가 7에서 17인 경우 성능에 큰 영향을 미치지 않았기 때문에 저자는 ATSS 모델이 꽤 robust(quite robust)하며, hyperparameter-free 라고 주장한다.
+
+![Tab:5](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/ATSS/Tab5.PNG){: width="60%"}
+
+![Tab:6](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/ATSS/Tab6.PNG){: width="60%"}
+
+ATSS 모델 또한 anchor을 사용하기 때문에 anchor size에 대한 영향 또한 존재한다. 위 첫번째 표는 다양한 anchor size에 따른 성능이며, 두번째 표는 다양한 anchor 비율(ratio)에 따른 성능이다. 결과를 보면, ATSS 모델은 위 세팅에 민감하지 않음(insensitive)을 알 수 있으며, 이 또한 robust 하다고 주장한다.
 
 ### Comparison
+첨부하지 않은 Table 8을 보면, 여러 object detection 모델들과 성능 비교를 하는 거대한 표를 확인할 수 있다. 타 모델과 같은 backbone 모델을 사용했음에도 불구하고, 더 높은 성능을 얻어냈으며, 모든 종류의 detection 모델과 비교했을때 가장 높은 성능을 얻어 냈다고 한다. 또한, 본 논문에서 제안한 기법은 positive, negative sample을 정의하는 방법에 관련된 것이기 때문에, 거의 모든 타 기법에 호환되며 상호 보완적이라고 주장한다.
 
 ### Discussion
-
-## Conclusion
+본 논문에서는 한 지역에 한 개의 anchor만 존재한 모델을 사용하여 실험을 진행하였다. 하지만 지역마다 anchor의 개수 또한 anchor-based, anchor-free detector의 차이이다. 위 표를 보면 기존 RetinaNet(#A=9)를 사용하면 논문에서 사용한 RetinaNet(#A=1) 보다 각 상황마다 높은 성능을 낼 수 있음을 알 수 있다. (e.g., RetinaNet(#A=9) vs RetinaNet(#A=1), RetinaNet(#A=9)+improve(Table 1) vs RetinaNet(#A=1)+improve(Table 1)) 하지만 ATSS 기법을 적용하면 (i.e., RetinaNet(#A=9)+improve+ATSS vs RetinaNet(#A=1)+improve+ATSS) 비슷한 성능을 얻을 수 있다. 즉 positive sample이 잘 뽑히기만 하면, anchor의 개수는 무의미하다 라는 결과이다. 저자는 이 기법에서는 지역 당 여러 개의 anchor은 바람직 하지 않고, 지역 당 여러개의 anchor를 쓰는 기법의 정확한 역할은 추가적인 연구가 필요하다고 첨언하였다.
 
 ## Review
+> 기존 기법 설명, 개념, 실험까지 매우매우 친절한 논문인 것 같다. 리뷰를 쓰면서도 저자의 생각을 빠짐없이 기록하려고 애썼던 것 같다. 그래서 리뷰가 매우 길어졌지만... object detection의 A-Z를 읽은 기분이 든다. object detection에 대해 연구하는 사람들에게 감히 추천 하고 싶은 논문..
 
 ## Reference
 - anchor-based detector (e.g., [RetinaNet](https://arxiv.org/abs/1708.02002))
