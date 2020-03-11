@@ -18,7 +18,7 @@ categories: Paper
 ### Object Relation Module
 기본 "Scaled Dot-Product Attention"의 과정을 기반으로 설계 되었다. Scaled Dot-Product Attention을 간략하게 설명하면, 쿼리 q와 key K의 요소간의 유사도를 계산하여 value V의 값을 변화 시키는 메커니즘이다. 계산된 유사도에 따라 V에 영향을 끼치는 정도가 달라지며, 이를 attention이라 생각하면 된다. V는 결국 관련 있는 요소들에 영향을 받아 값이 변한다.
 
-![fig:2](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/relation_networks_for_object_detection/fig2.PNG){: width="640%"}
+![fig:2](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/relation_networks_for_object_detection/fig2.PNG){: width="60%"}
 
 이제 object relation module에 대한 설명을 하겠다. 우선 각 object는 **geometric feature**(f_G)와 **appearance feature**(f_A)로 이루어져 있다. 당연히 geometric feature은 4-d 이며, appearance feature은 architecture 구조에 따라 달라진다. 
 
