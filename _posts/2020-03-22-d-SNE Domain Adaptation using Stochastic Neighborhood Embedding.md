@@ -9,7 +9,7 @@ use_math: true
 CVPR 2019 에서 발표된 논문이다. ([Arxiv](https://arxiv.org/abs/1905.12775) || [Code](https://github.com/aws-samples/d-SNE))
 
 ## Domain Adaptation
-Domain Adaptation 충분한 데이터가 없을 때에도 준수한 성능을 내기 위한 연구이다. Domain Adaptation 연구는 backpropagation 에 GRL(Gradient Reversal Layer)을 추가한 [DANN](https://arxiv.org/abs/1505.07818), Discriminator를 이용한 [ADDA](https://arxiv.org/abs/1702.05464), CycleGAN과 비슷한 방식으로 픽셀 레벨의 Domain Adaptation을 진행한 [CyCADA](https://arxiv.org/abs/1711.03213), 두 도메인 사이의 거리를 고려한 [DLOW](https://arxiv.org/abs/1812.05418) 등 여러 방법으로 꾸준히 연구되어 왔다. **Domain Adaptation**은 간단히 얘기를 한다면 **label이 존재하는 S(source) 도메인 데이터를 이용하여, label이 존재하지 않는 T(target) 도메인에서 높은 성능을 내는 모델을 만드는 연구**이다.
+Domain Adaptation 충분한 데이터가 없을 때에도 준수한 성능을 내기 위한 연구이다. Domain Adaptation 연구는 backpropagation 에 GRL(Gradient Reversal Layer)을 추가한 [DANN](https://arxiv.org/abs/1505.07818), Discriminator를 이용한 [ADDA](https://arxiv.org/abs/1702.05464), CycleGAN과 비슷한 방식으로 픽셀 레벨의 Domain Adaptation을 진행한 [CyCADA](https://arxiv.org/abs/1711.03213), 두 도메인 사이의 거리를 고려한 [DLOW](https://arxiv.org/abs/1812.05418) 등 여러 방법으로 꾸준히 연구되어 왔다. **Domain Adaptation**은 간단히 얘기를 한다면 **S(source) 도메인 데이터를 이용하여, T(target) 도메인에서 높은 성능을 내는 모델을 만드는 연구**이다.
 
 ## Introduction
 
@@ -30,8 +30,20 @@ Domain Adaptation 에는 두가지 방법이 있다.
 본 논문에서 소개하는 d-SNE은 두번째 방법을 이용한다. 여러 기법과 모델을 사용하였고, 자세한 내용은 바로 밑에서 다루겠다.
 
 ## d-SNE
-$$d(x_{i}^s, x_{j}^t) = ||\phi_{D^S}(x_{i}^S) -  \phi_{D^T}(x_{j}^T)||_{2}^2$$
 
+> 이 논문은 수식 쓰기가 너무 귀찮아서.. 이미지 파일로 대체...
+
+$$d(x_{i}^s, x_{j}^t) = ||\Phi_{D^S}(x_{i}^s) -  \Phi_{D^T}(x_{j}^t)||_{2}^2$$
+
+위 수식은 latent-space에서 source domain (i번째 sample)과 target domain (j번째 sample)의 L2 distance를 뜻한다. 이때 $$\Phi_{D^s}$$는 source domain 데이터를 latent-space로 임베딩 시키는 neural networks이며, $$\Phi_{D^t}$$ 또한 마찬가지이다.
+
+![Equ:2](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/d_SNE/equ2.PNG){: width="60%"}
+
+위 수식은 j번째 target domain $$x_{j}^t$$와 source domain의 모든 데이터($$x \in D^s$$)의 거리 중 i번째 sample ($$x_{i}^s$$)과의 거리 확률을 구하는 식이다. 거리가 가까울 수록 더 큰 값을 주기 위해 음수를 붙여 사용하였으며, softmax 함수를 이용하였다. 만약 $$x_{j}^t$$와 $$x_{i}^s$$가 같은 label을 가졌을때($$y_{j}^t$$ = $$y_{i}^s$$), $$p_{ij}$$가 크면 좋은 latent-space를 구축한 것이다. 
+
+![Equ:3](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/d_SNE/equ3.PNG){: width="60%"}
+
+$$x_{j}^t$$를 정확하게 예측할 확률 $$p_j$$는 위 식과 같다. 위 식에서 $$y_{j}^t = k$$ 일때, $$y^s = k$$ 인 $$x^s$$의 집합을 $$D_{k}^s$$로 두었다. 또한 $$D_{k}^s$$의 개수를 $$N_{k}^s$$으로 두었다. 여기서 중요한 점은 target sample($$x_{j}^t, y_{j}^t=k$$)이 주어졌을 때, $$D^s$$은 $$D_{k}^s$$ 와 $$D_{\cancel{k}}^s$$로 나눠진다.
 
 ## Review
 > ..
