@@ -45,6 +45,32 @@ $$d(x_{i}^s, x_{j}^t) = ||\Phi_{D^S}(x_{i}^s) -  \Phi_{D^T}(x_{j}^t)||_{2}^2$$
 
 $$x_{j}^t$$를 정확하게 예측할 확률 $$p_j$$는 위 식과 같다. 위 식에서 $$y_{j}^t = k$$ 일때, $$y^s = k$$ 인 $$x^s$$의 집합을 $$D_{k}^s$$로 두었다. 또한 $$D_{k}^s$$의 개수를 $$N_{k}^s$$으로 두었다. 여기서 중요한 점은 target sample($$x_{j}^t, y_{j}^t=k$$)이 주어졌을 때, $$D^s$$은 $$D_{k}^s$$ 와 $$D_{\cancel{k}}^s$$로 나눠진다.
 
+![Equ:4](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/d_SNE/equ4.PNG){: width="60%"}
+
+![Equ:5](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/d_SNE/equ5.PNG){: width="60%"}
+
+그래서 분모를 두개의 합으로 바꾸면 위 같은 식이 만들어진다. $$x_{j}^t$$를 정확히 예측하기 위해서는 $$p_j$$가 커져야 하기 때문에, 역수를 취해서 object function으로 사용할 수 있다. 이때 log를 씌어서 log-lieklihood를 줄이는 방향으로 학습이 이루어진다.
+
+![Equ:6](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/d_SNE/equ6.PNG){: width="60%"}
+
+하지만 이 likelihood loss는 scaling issue가 생길 수 있고, adverse effect를 일으킬 수 있다고 한다. 이에 본 논문에서는 likelihood를 **modified-Hausdorffian distnace**를 사용해서 relax 시켰다. **단순히 같은 class를 갖고 있는 sample 중 가장 긴 거리를 줄이고, 다른 class를 갖고 있는 sample 중 가장 가까운 거리를 최대화 시키는 방향으로 Loss를 설계하였다.** 위 식에서 sup는 supremum, inf는 infimum을 뜻한다.
+
+![Fig:3](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/d_SNE/fig3.PNG){: width="60%"}
+
+![Equ:7](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/d_SNE/equ7.PNG){: width="60%"}
+
+마지막으로 각 모델($$\Phi_{D^s}$$, $$\Phi_{D^t}$$)은 cross-entropy loss로도 학습이 된다. 따라서 learning formulation은 위와 같다. 각각 독립적으로 weight update를 하도록 하며, 위 figure 3에서 잘 나타내진다.
+
+마지막으로 label이 되어있지 않은 target domain을 위해 semi-supervised learning을 진행하였다.
+
+
+
+
+
+
+
+
+
 ## Review
 > ..
 
