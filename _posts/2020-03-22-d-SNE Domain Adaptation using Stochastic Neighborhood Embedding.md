@@ -98,7 +98,11 @@ $$x_{j}^t$$를 정확하게 예측할 확률 $$p_j$$는 위 식과 같다. 위 �
 
 ![tab:5](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/d_SNE/tab5.PNG){: width="60%"}
 
-위는 각 실험들의 결과이다. 타 모델보다 d-SNE 모델이 대체로 좋은 성능을 내는 것을 확인할 수 있다. 표의 Setting에서 U가 뜻하는 것은 모든 target domain data를 사용해서 unsupervised learning을 진행한 것이고, S는 각 클래스당 $$||D_{k}^t||$$개의 labeled target domain data를 이용하여 학습한 것이다.
+위는 각 실험들의 결과이다. 타 모델보다 d-SNE 모델이 대체로 좋은 성능을 내는 것을 확인할 수 있다. 표의 Setting에서 U가 뜻하는 것은 모든 target domain data
+
+를 사용해서 unsupervised learning을 진행한 것이고, S는 각 클래스당
+
+ $$||D_{k}^t||$$개의 labeled target domain data를 이용하여 학습한 것이다.
 
 ## Review
 > Training 혹은 inference에 관한 자세한 설명이 없어서 아쉬웠지만, 얼추 추측이 가능한 레벨이기 때문에 이해할 수 있었던 것 같다. 이 paper를 읽으면서 domain adaptation에 관한 잘못된 지식을 고친 것 같다.
