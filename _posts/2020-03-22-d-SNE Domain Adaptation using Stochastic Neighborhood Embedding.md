@@ -61,18 +61,20 @@ $$x_{j}^t$$를 정확하게 예측할 확률 $$p_j$$는 위 식과 같다. 위 �
 
 마지막으로 각 모델($$\Phi_{D^s}$$, $$\Phi_{D^t}$$)은 cross-entropy loss로도 학습이 된다. 따라서 learning formulation은 위와 같다. 각각 독립적으로 weight update를 하도록 하며, 위 figure 3에서 잘 나타내진다.
 
-마지막으로 label이 되어있지 않은 target domain을 위해 semi-supervised learning을 진행하였다.
+마지막으로 unlabeled data를 이용하여 성능을 boost 시키기 위해, semi-supervised learning을 진행하였다. [Mean-Teacher](https://arxiv.org/pdf/1703.01780.pdf) 모델과 유사하게 학습을 시켰다고한다. Mean-Teacher 모델은 다음과 같다.
+1. input image를 student 그리고 teacher 모델을 통해 각각 prediction을 얻은다.
+    - student, teacher 모델에는 noise를 추가한다.
+2. 이때 두 prediction의 consistency cost를 이용하여 student model을 학습시킨다.
+3. label과 classification cost를 이용하여 student model을 학습시킨다.
+4. 학습된 student model weights를 이용하여 teacher model weights를 업데이트 한다.
+    - exponential moving average 이용
+5. unlabeled data인 경우 3의 단계는 제외한다.
 
-
-
-
-
-
-
+## Experiments
 
 
 ## Review
 > ..
 
 ## Reference
-- [..](https://......)
+- [Mean-Teacher](https://arxiv.org/pdf/1703.01780.pdf)
