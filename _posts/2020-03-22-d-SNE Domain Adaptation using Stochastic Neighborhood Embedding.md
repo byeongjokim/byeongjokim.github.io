@@ -71,10 +71,37 @@ $$x_{j}^t$$를 정확하게 예측할 확률 $$p_j$$는 위 식과 같다. 위 �
 5. unlabeled data인 경우 3의 단계는 제외한다.
 
 ## Experiments
+세가지 종류의 데이터셋을 이용하여 실험을 하였다.
 
+![fig:4](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/d_SNE/fig4.PNG){: width="60%"}
+
+1. digits datasets
+    - MNIST
+    - MNIST-M
+    - USPS
+    - SVHN
+2. office datasets
+    - Office-31A (in Amazon)
+    - Office-31D (using DSLR)
+    - Office-31W (using web camera)
+3. VisDA-C datasets
+    - VisDA-C sythetic
+    - VisDA-C real
+
+![fig:5](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/d_SNE/fig5.PNG){: width="60%"}
+
+위 figure은 데이터의 분포를 시각화 한 것이다. domain adaptation을 적용한(bottom) 실험이 데이터 분포를 잘 나누는 것을 알 수 있다.
+
+![tab:2](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/d_SNE/tab2.PNG){: width="60%"}
+
+![tab:4](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/d_SNE/tab4.PNG){: width="60%"}
+
+![tab:5](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/d_SNE/tab5.PNG){: width="60%"}
+
+위는 각 실험들의 결과이다. 타 모델보다 d-SNE 모델이 대체로 좋은 성능을 내는 것을 확인할 수 있다. 표의 Setting에서 U가 뜻하는 것은 모든 target domain data를 사용해서 unsupervised learning을 진행한 것이고, S는 각 클래스당 $$|D_{k}^t|$$개의 labeled target domain data를 이용하여 학습한 것이다.
 
 ## Review
-> ..
+> Training 혹은 inference에 관한 자세한 설명이 없어서 아쉬웠지만, 얼추 추측이 가능한 레벨이기 때문에 이해할 수 있었던 것 같다. 이 paper를 읽으면서 domain adaptation에 관한 잘못된 지식을 고친 것 같다.
 
 ## Reference
 - [Mean-Teacher](https://arxiv.org/pdf/1703.01780.pdf)
