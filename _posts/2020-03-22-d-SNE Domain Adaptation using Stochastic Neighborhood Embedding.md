@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "d-SNE: Domain Adaptation using Stochastic Neighborhood Embedding"
-description: writing review...
+description: Domain Adaptation은 S(source) 도메인 데이터를 이용하여, T(target) 도메인에서 높은 성능을 내는 모델을 만드는 연구이다.
 date:   2020-03-22 20:03:00 +0900
 categories: Paper
 use_math: true
