@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "LeetCode 01 - Add Two Numbers"
+title:  "LeetCode 02 - Add Two Numbers"
 description: LeetCode - Top 100 Liked Questions
 date:   2020-03-26 20:03:00 +0900
 categories: Problems
