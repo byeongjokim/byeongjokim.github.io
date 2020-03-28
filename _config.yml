@@ -40,6 +40,9 @@ texture:
 # Build settings
 # theme: texture
 
+paginate: 3
+paginate_path: "/page/:num"
 plugins:
   - jekyll-seo-tag
+  - jekyll-paginate
 #  - jekyll-feed
