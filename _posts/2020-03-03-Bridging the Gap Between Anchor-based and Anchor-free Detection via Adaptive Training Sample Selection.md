@@ -113,6 +113,8 @@ ATSS 모델 또한 anchor을 사용하기 때문에 anchor size에 대한 영향
 첨부하지 않은 Table 8을 보면, 여러 object detection 모델들과 성능 비교를 하는 거대한 표를 확인할 수 있다. 타 모델과 같은 backbone 모델을 사용했음에도 불구하고, 더 높은 성능을 얻어냈으며, 모든 종류의 detection 모델과 비교했을때 가장 높은 성능을 얻어 냈다고 한다. 또한, 본 논문에서 제안한 기법은 positive, negative sample을 정의하는 방법에 관련된 것이기 때문에, 거의 모든 타 기법에 호환되며 상호 보완적이라고 주장한다.
 
 ### Discussion
+![Tab:7](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/ATSS/Tab7.PNG){: width="60%"}
+
 본 논문에서는 한 지역에 한 개의 anchor만 존재한 모델을 사용하여 실험을 진행하였다. 하지만 지역마다 anchor의 개수 또한 anchor-based, anchor-free detector의 차이이다. 위 표를 보면 기존 RetinaNet(#A=9)를 사용하면 논문에서 사용한 RetinaNet(#A=1) 보다 각 상황마다 높은 성능을 낼 수 있음을 알 수 있다. (e.g., RetinaNet(#A=9) vs RetinaNet(#A=1), RetinaNet(#A=9)+improve(Table 1) vs RetinaNet(#A=1)+improve(Table 1)) 하지만 ATSS 기법을 적용하면 (i.e., RetinaNet(#A=9)+improve+ATSS vs RetinaNet(#A=1)+improve+ATSS) 비슷한 성능을 얻을 수 있다. 즉 positive sample이 잘 뽑히기만 하면, anchor의 개수는 무의미하다 라는 결과이다. 저자는 이 기법에서는 지역 당 여러 개의 anchor은 바람직 하지 않고, 지역 당 여러개의 anchor를 쓰는 기법의 정확한 역할은 추가적인 연구가 필요하다고 첨언하였다.
 
 ## Review
