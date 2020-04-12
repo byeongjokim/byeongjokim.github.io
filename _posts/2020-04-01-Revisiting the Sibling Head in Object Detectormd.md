@@ -15,8 +15,9 @@ use_math: true
 
 small dataset을 해결하기 위해 few-shot learning, metric learning, 그리고 meta-learning 기법이 존재한다. 하지만 이 기법들 모두 우선 large dataset을 사용해야 한다. 이 논문에서는 large dataset 없이 각 클래스당 20 ~ 100 개 미만의 학습 이미지로 이루어진 **small dataset** 만을 이용한다.
 
-## Method
-
+## Cosine Loss
+cosine similarity는 두 vector $$a, b \in R^{d}$$의 사이각을 이용한 유사도이다.
+$$\sigma_{cos}(a, b) = cos(a \angle b) = \frac{<a,b>}{\|a\|_{2} \cdot \|b\|_{2}}$$
 
 ## Experiments
 
