@@ -16,22 +16,21 @@ use_math: true
 small dataset을 해결하기 위해 few-shot learning, metric learning, 그리고 meta-learning 기법이 존재한다. 하지만 이 기법들 모두 우선 large dataset을 사용해야 한다. 이 논문에서는 large dataset 없이 각 클래스당 20 ~ 100 개 미만의 학습 이미지로 이루어진 **small dataset** 만을 이용한다.
 
 ## Cosine Loss
-cosine similarity는 두 vector $$a, b \in R^{d}$$의 사이각을 이용한 유사도이다.
+cosine similarity는 두 vector $$a, b \in R^{d}$$의 사이각을 이용한 유사도이다. 아래 식에서 $$<\cdot , \cdot>$$은 dot product를 뜻하며, $$\|\|_{p}$$는 $$L^{p}$$ norm을 뜻한다.
 
 $$\sigma_{cos}(a, b) = cos(a \angle b) = \frac{<a,b>}{\|a\|_{2} \cdot \|b\|_{2}}$$
 
-위 식에서 $$<\cdot , \cdot>$$은 dot product를 뜻하며, $$\|\|_{p}$$는 $$L^{p}$$ norm을 뜻한다.
+$$x \in X$$ 데이터와 $$y \in C$$ label이 주어질 때, $$f_{\theta} \colon X \rightarrow R^{d}$$ 를 통해 X는 d-dimensional feature space로 transform 된다. 그리고 $$\psi \colon R^{d} \rightarrow P$$ 와 $$\varphi \colon C \rightarrow P$$ 가 각각 feature와 classes를 prediction space P에 임베딩 시킨다.
 
-$$x \in X$$인 도메인과 $$y \in C$$인 label이 있을 때, $$f_{\theta} \colon X \rightarrow R^{d}$$ 를 통해 X를 d-dimensional feature space로 transform 시킨다. 그리고 $$\psi \colon R^{d} \rightarrow P$$와 $$\varphi \colon C \rightarrow P$$가 각각 feature와 classes를 prediction space P에 임베딩 시킨다.
-
-$$\varphi$$가 고정되어 지면, $$f_{theta}$$의 파라미터를 학습 시켜서 이미지 feature와 각 class의 cosine simiairty를 극대화 시키는 것이 cosine loss function이며, 아래 식과 같다.
+$$\varphi$$ 를 고정시키고, $$f_{theta}$$ 의 파라미터를 학습 시켜서 이미지 feature와 각 class의 cosine simiairty를 극대화 시키는 것이 cosine loss function이며, 아래 식과 같다.
 
 $$L_{cos}(x, y) = 1 - \sigma_{cos}(f_{\theta}(x), \varphi(y))$$
 
-이때 cosine similarity가 dot product로 변할 수 있도록 두 백터 $$f_{\theta}(x), \varphi(y)$$를 unit hypersphere로 바꾸었다. $$\psi = \frac{x}{\|x\|_{2}}$$를 사용하고, $$\varphi$$를 one-hot vector로 사용하면 두 벡터 $$f_{\theta}(x), \varphi(y)$$는 각각 unit hypersphere가 된다.
+$$\psi = \frac{x}{\|x\|_{2}}$$ 와 one-hot vector인 $$\varphi$$ 를 사용하여 두 백터 $$f_{\theta}(x), \varphi(y)$$ 를 unit hypersphere로 바꾸었다. 이로써 cosine similarity를 단순한 dot product로 구할 수 있게 되었다.
 
-$$L_{cos}(x, y) = 1 - \sigma_{cos}(\varphi(y), \psi(f_{\theta}(x)))$$
+$$L_{cos}(x, y) = 1 - <\varphi(y), \psi(f_{\theta}(x))>$$
 
+## Categorical Cross-Entropy 그리고 Mean Squared Error와의 비교
 
 ## Experiments
 
