@@ -30,20 +30,26 @@ $$\psi = \frac{x}{\|x\|_{2}}$$ 와 one-hot vector인 $$\varphi$$ 를 사용하�
 
 $$L_{cos}(x, y) = 1 - <\varphi(y), \psi(f_{\theta}(x))>$$
 
-## Categorical Cross-Entropy 그리고 Mean Squared Error와의 비교
+## Comparison with Categorical Cross-Entropy and Mean Squared Error
 cosine loss를 categorical cross-entropy loss 그리고 mean squared error(MSE)와 비교를 하였다. 가장 큰 차이점은 예측(predictions)과 ground-truth 와의 차이를 측정하는 방식에 있다.
 
 categorical cross-entropy loss 그리고 mean squared error(MSE) 두 loss를 간단히 설명하면 
-- MSE는 feature space에 transform을 적용하지 않고, Euclidean prediction space를 이용한다. 위 unit hypersphere를 통한 $$L_{cos}$$ 식을 풀어 쓰면 Euclidean distance와 매우 유사하다. ($$L_2$$ Norm 값이 1로 고정 이기 때문에)
+- MSE는 feature space에 transform을 적용하지 않고, Euclidean prediction space를 이용한다. 위 unit hypersphere를 통한 $$L_{cos}$$ 식을 풀어 쓰면 Euclidean distance와 매우 유사하다. ($$L^2$$ Norm 값이 1로 고정 이기 때문에)
 - Categorical cross-entropy는 Kullback-Leibler divergence를 이용하여 확률 분포(probability distribution) 공간의 차이를 측정하는 loss 이다.  이는 softmax 함수를 이용하여 prediction space로 transform 시킨다. 
 
 두 loss와 비교했을 때 cosine loss는 두 가지 특징이 있다.
 - loss는 [0, 2] 경계로 되어있다. 반면에 다른 loss는 매우 큰 값을 가진다.
 - feature vector의 direction 만을 고려하기 때문에, scaling에 invariant 하다.
 
-![Fig:1](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/cosine loss/fig1.PNG){: width="60%"}
+![Fig:1](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/cosine loss/fig1.PNG){: width="80%"}
 
-위 figure을 보면 cross entropy loss는 급강하 영역과 두 넓은 지역으로 이루어져있다. 밝은 부분과 어두운 부분은 일정하진 않지만 매우 차이가 적다.
+위 figure을 보면 cross entropy loss는 급강하 영역과 두 넓은 지역으로 이루어져있다. 밝은 부분과 어두운 부분은 일정하진 않지만 매우 차이가 적다. 따라서 초기화 및 learning rate 설정을 잘 해야할 것이다. 반면, figure 1.c cosine loss을 보면 색이 고르게 분포되어 있어서 더 robust 할 것이다.
+
+또한 cross-entropy loss 는 true class의 값이 다른 class의 값 보다 헌저하게 커야만(혹은 infinity) optimum 한 값을 얻어진다. 따라서 적은 dataset을 이용하여 학습을 하면, overfitting이 일어날 수 있다. 보통 이 문제를 해결하기 위해 label smoothing 을 적용한다(ground-truth distribution 에 noise를 주어서 regularization). 간단하게 설명하자면 [1, 0, 0] 이라는 ground-truth 대신 [$$1-\varepsilon$$, $$\frac{\varepsilon}{n-1}$$, $$\frac{\varepsilon}{n-1}$$] 로 설정하는 것이다. 이때 $$\varepsilon$$ 은 0.1 과 같은 작은 상수이다.
+
+cosine loss는 $$L^{2}$$ normalization이 regularizer 역할을 하여 $$\varepsilon$$ 과 같은 hyper-parameter를 사용하지 않는다. 또한 높은 차원에서 문제가 되는 Euclidean distance를 사용하지 않고, 방향만을 고려하여 학습에 적용된다. 따라서 적은 dataset을 사용할 때, scaling에 invariance한 점이 좋은 regularizer로 작용된다.
+
+## Semantic Class Embeddings
 
 
 
