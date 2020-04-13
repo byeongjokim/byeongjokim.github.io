@@ -31,6 +31,21 @@ $$\psi = \frac{x}{\|x\|_{2}}$$ 와 one-hot vector인 $$\varphi$$ 를 사용하�
 $$L_{cos}(x, y) = 1 - <\varphi(y), \psi(f_{\theta}(x))>$$
 
 ## Categorical Cross-Entropy 그리고 Mean Squared Error와의 비교
+cosine loss를 categorical cross-entropy loss 그리고 mean squared error(MSE)와 비교를 하였다. 가장 큰 차이점은 예측(predictions)과 ground-truth 와의 차이를 측정하는 방식에 있다.
+
+categorical cross-entropy loss 그리고 mean squared error(MSE) 두 loss를 간단히 설명하면 
+- MSE는 feature space에 transform을 적용하지 않고, Euclidean prediction space를 이용한다. 위 unit hypersphere를 통한 $$L_{cos}$$ 식을 풀어 쓰면 Euclidean distance와 매우 유사하다. ($$L_2$$ Norm 값이 1로 고정 이기 때문에)
+- Categorical cross-entropy는 Kullback-Leibler divergence를 이용하여 확률 분포(probability distribution) 공간의 차이를 측정하는 loss 이다.  이는 softmax 함수를 이용하여 prediction space로 transform 시킨다. 
+
+두 loss와 비교했을 때 cosine loss는 두 가지 특징이 있다.
+- loss는 [0, 2] 경계로 되어있다. 반면에 다른 loss는 매우 큰 값을 가진다.
+- feature vector의 direction 만을 고려하기 때문에, scaling에 invariant 하다.
+
+![Fig:1](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/cosine loss/fig1.PNG){: width="60%"}
+
+위 figure을 보면 cross entropy loss는 급강하 영역과 두 넓은 지역으로 이루어져있다. 밝은 부분과 어두운 부분은 일정하진 않지만 매우 차이가 적다.
+
+
 
 ## Experiments
 
