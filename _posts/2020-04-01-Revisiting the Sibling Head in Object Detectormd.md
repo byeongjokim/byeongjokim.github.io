@@ -1,12 +1,12 @@
 ---
 layout: post
 title:  "Deep Learning on Small Datasets without Pre-Training using Cosine Loss"
-description: Writing Review...
+description: 하드웨어의 발전으로 인해 매우 큰 dataset을 사용하고있다. 하지만 학습 데이터를 많이 모으기에는 한계가 존재하며 이를 위해 pre-trained 모델과 fine-tuning을 통하여 이를 극복할 수 있다. 하지만, pre-trained 모델을 사용한 *transfer learning*에는 문제 될만한 것이 두가지가 있다.
 date:   2020-04-01 20:03:00 +0900
 categories: Paper
 use_math: true
 ---
-([Arxiv](https://arxiv.org/abs/1901.09054))
+WACV2020에 발표된 논문이다. 적은 데이터셋과 scratch weight으로 학습 할 때 좋은 성능을 내는 방법에 관해 소개한다. ([Arxiv](https://arxiv.org/abs/1901.09054))
 
 ## Introduction
 하드웨어의 발전으로 인해 매우 큰 dataset을 사용하고있다. 하지만 학습 데이터를 많이 모으기에는 한계가 존재하며 이를 위해 pre-trained 모델과 fine-tuning을 통하여 이를 극복할 수 있다. 하지만, pre-trained 모델을 사용한 *transfer learning*에는 문제 될만한 것이 두가지가 있다. 우선 의료 이미지 같이 target domain이 매우 special한 경우 기존(imageNet) 이미지와 큰 차이가 있으며, license의 문제 또한 존재한다.
