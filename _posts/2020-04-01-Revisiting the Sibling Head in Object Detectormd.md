@@ -41,7 +41,7 @@ categorical cross-entropy loss 그리고 mean squared error(MSE) 두 loss를 간
 - loss는 [0, 2] 경계로 되어있다. 반면에 다른 loss는 매우 큰 값을 가진다.
 - feature vector의 direction 만을 고려하기 때문에, scaling에 invariant 하다.
 
-![Fig:1](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/cosine loss/fig1.PNG){: width="80%"}
+![Fig:1](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/cosine_loss/fig1.PNG){: width="80%"}
 
 위 figure을 보면 cross entropy loss는 급강하 영역과 두 넓은 지역으로 이루어져있다. 밝은 부분과 어두운 부분은 일정하진 않지만 매우 차이가 적다. 따라서 초기화 및 learning rate 설정을 잘 해야할 것이다. 반면, figure 1.c cosine loss을 보면 색이 고르게 분포되어 있어서 더 robust 할 것이다.
 
@@ -50,12 +50,46 @@ categorical cross-entropy loss 그리고 mean squared error(MSE) 두 loss를 간
 cosine loss는 $$L^{2}$$ normalization이 regularizer 역할을 하여 $$\varepsilon$$ 과 같은 hyper-parameter를 사용하지 않는다. 또한 높은 차원에서 문제가 되는 Euclidean distance를 사용하지 않고, 방향만을 고려하여 학습에 적용된다. 따라서 적은 dataset을 사용할 때, scaling에 invariance한 점이 좋은 regularizer로 작용된다.
 
 ## Semantic Class Embeddings
+위의 $$\varphi$$ 같은 경우 class를 one-hot vector로 embedding 하였다. 하지만 one-hot vector에는 class 간의 semantic relationship이 고려 되어있지 않다. 이를 위해 WordNet과 같은 ontology를 이용하여 $$\varphi_{sem}$$ class embedding 하였다 [pdf](https://arxiv.org/abs/1809.09924). 이제 이미지의 smeantic consistency를 향상 시킬 수 있게 되었다.
 
+하지만 분류 정확성을 위해 categorical cross-entropy와 함께 사용을 하였으며 그 식은 아래와 같다. $$g_{\theta}$$ 는 softmax activation이 적용된 fully-connected layer이다.
 
+$$L_{cos+xent}(x, y) = 1 - <\psi(f_{\theta}(x)), \varphi_{sem}(y)> - \lambda <\varphi_{onehot}(y), log(g_{\theta}(\psi(f_{\theta}(x))))>$$
+
+이로써 categorical cross-entropy 보다 좋은 classification accuracy 성능을 기록하였다. 하지만 이 성능향상은 knowledge를 추가해서 라기보다 cosine loss를 사용해서 일어낸 결과이다.
 
 ## Experiments
+### Datasets
+
+![Tab:1](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/cosine_loss/tab1.PNG){: width="60%"}
+
+이미지 datasets(CUB, NAB, Cars, Flowers-102, MIT 67 Indoor Scenes, CIFAR-100) 뿐 아니라 text datasets(AG News)을 사용하였다. 각 데이터셋 마다의 세팅은 페이퍼에 잘 나와있다.
+
+### Performance Comparison
+![Tab:2](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/cosine_loss/tab2.PNG){: width="60%"}
+
+위 표를 보면 MSE, cross-entropy, cosine loss(one-hot embeddings or semantic embeddings), cosine loss + cross-entropy 등 여러가지 loss를 적용 했을 때의 accuracy를 측정하였다. 
+
+small dataset인 경우 cross-entropy를 사용했을 때 보다 cosine loss를 사용 했을 때 더 좋은 성능을 얻었다. 하지만 large dataset인 CIFAR-100의 경우 cross-entropy를 사용 했을 때 성능이 더 높은 것을 알 수 있다.
+
+> 저자는 논문에서 fine-tuning로 학습한 성능과 차이가 줄어들 수 있을 것이라 얘기했다. 차이를 많이 줄인 것은 분명하지만, fine-tuning을 따라잡을 방법은 없을까..?
+
+### Effect of Semantic Information
+위 표를 보면 semantic information을 사용 했을 때 일반적인 cosine loss에 비해 약간의 성능 상승이 있었다.
+
+![Tab:3](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/cosine_loss/tab3.PNG){: width="60%"}
+
+위 표는 여러 embedding을 사용했을 떄의 성능을 보여준다. 계층 구조가 깊어질 수록 $$L_{cos+xent}$$의 성능이 상승하는 것을 확인 할 수 있다. semantic embedding은 유사한 클래스를 가까운 공간에 위치 시킨다 반면 다른 클래스는 멀리 떨어진 공간에 위치 시킨다. 따라서 cosine 유사도를 사용했을 때, 아예 다른(dissimilar) class의 고려를 덜하게 만들 수 있다.
+
+### Effect of Dataset Size
+![Fig:2](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/cosine_loss/fig2.PNG){: width="70%"}
+
+위 figure을 보면 cosine loss는 일반적인 cross-entropy 보다 더 나은 성능을 보이며, 샘플을 추가할 때 더 빨리 개선된다. 또한 semantic information이 있을 때 가장 좋은 성능 개선이 이루어지는 것을 알 수 있다.
+
+fine-tuned 모델은 이미 많은 데이터셋(ImageNet)을 사용하였기 때문에 가장 좋은 성능을 냈지만, Introduction에서 언급한 두 가지 문제가 있다. 따라서 본 논문의 cosine loss를 사용하는 것이 중요하다고 한다.
 
 ## Review
-> d
+> 비록 pre-trained model을 사용한 성능에는 미치지 않았지만, 단순히 loss를 바꿈으로써 기존 cross-entropy loss에 비해 높은 성능향상이 있었다는 점이 매우 흥미로웠다.
 
 ## Reference
+- [Semantic Embedding](https://arxiv.org/abs/1809.09924)
