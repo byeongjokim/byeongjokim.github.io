@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Deep Learning on Small Datasets without Pre-Training using Cosine Loss"
+title:  "Paper Reivew - Deep Learning on Small Datasets without Pre-Training using Cosine Loss"
 description: 하드웨어의 발전으로 인해 매우 큰 dataset을 사용하고있다. 하지만 학습 데이터를 많이 모으기에는 한계가 존재하며 이를 위해 pre-trained 모델과 fine-tuning을 통하여 이를 극복할 수 있다. 하지만, pre-trained 모델을 사용한 *transfer learning*에는 문제 될만한 것이 두가지가 있다.
 date:   2020-04-01 20:03:00 +0900
 categories: Paper
