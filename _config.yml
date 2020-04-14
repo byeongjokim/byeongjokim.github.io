@@ -16,7 +16,7 @@ permalink: /posts/:title/
 texture:
   title: BYEONGJO's RESEARCH BLOG
   tagline: Developer. Designer
-  date_format: "%b %-d, %Y"
+  date_format: "%b %d, %Y"
   style: white
   showNav: false
   showPicker: false
