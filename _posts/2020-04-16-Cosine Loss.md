@@ -7,7 +7,7 @@ categories: Development
 use_math: true
 ---
 
-Deep Learning on Small Datasets without Pre-Training using Cosine Loss ([Arxiv](https://arxiv.org/abs/1901.09054), [Review](https://byeongjokim.github.io/posts/Revisiting-the-Sibling-Head-in-Object-Detectormd/))의 cosine loss implements(Pytorch)
+Deep Learning on Small Datasets without Pre-Training using Cosine Loss ([Arxiv](https://arxiv.org/abs/1901.09054), [Review](https://byeongjokim.github.io/posts/Deep-Learning-on-Small-Datasets-without-Pre-Training-using-Cosine-Loss/))의 cosine loss implements(Pytorch)
 
 Semantic Class Embeddings를 사용하지 않고 **One-Hot Embedding**을 사용하여 **Cosine Loss + Cross Entropy Loss**를 implement 하였다.
 
