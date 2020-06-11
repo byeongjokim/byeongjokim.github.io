@@ -13,6 +13,13 @@ Facebook Research에서 발표한 Object Detection 모델([Paper](https://ai.fac
 
 ## Bipartite Matching Loss
 DETR은 decoder을 통해 고정된 사이즈인 N개의 object를 예측 한다. 이 N개의 object와 ground-truth object간의 **optimal bipartite matching**이 이루어진다.
+우선 N개 object들의 permutation(순열) 중 가장 $$L_{match}$$가 작은 순열을 찾는다.
+
+![Equ:1](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/detr/equ1.PNG){: width="50%"}
+![Equ:1-1](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/detr/equ1-1.PNG){: width="50%"}
+![Equ:2](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/detr/equ2.PNG){: width="50%"}
+![Equ:3](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/detr/equ3.PNG){: width="50%"}
+![Fig:2](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/detr/fig2.PNG){: width="60%"}
 
 ## Transformer
 
