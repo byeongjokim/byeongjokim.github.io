@@ -36,7 +36,11 @@ $$L_{match}$$은 각 쌍의 class와 box에 대한 pair-wise matching cost이다
 transformer를 설명하기 앞서 architecture는 위 figure와 같다. feature를 추출하는 backbone, Encoder-Decoder Transformer, FFN으로 구성되어 있다.
 
 ## Transformer Encoder
+encoder layer는 multi-head self-attention과 FFN으로 구성되어 있다. encoder은 input으로 sequence를 사용하기 때문에 Backbone의 output인 featuremap $$f \in R^{C \times H \times W}$$를 변형해야 한다. 우선 f에 1x1 convolution을 적용하여 $$z_0 \in R^{d \times H \times W}$$를 생성한다. 그리고 나서 위 $$z_0$$를 $$d \times HW$$로 바꾼다.
 
+loss 계산할 때 permutation을 구하기 때문에, 이에 invariant 하도록 각 attention layer의 인풋으로 positional encoding을 추가한다. 
+
+> 각 channel(d)은 각각 이미지의 다른 특징 정보를 갖고 있다. 이미지를 하나의 context, featuremap의 한 channel을 하나의 단어로 생각을 해야한다. 이 channel들은 self-attention을 통해, 전체 channel과 어떤 연관을 갖고 있는지에 대한 정보를 포함하여 encoding이 된다. 그 후 decoder에서는 각 encoder의 아웃풋(channels)에 attention을 적용하여, 적당한 특징들로 조합된 object를 예측하게 된다. 라는 것이 Transformer을 사용한 이유가 아닐까..
 
 ## Transformer Decoder
 
