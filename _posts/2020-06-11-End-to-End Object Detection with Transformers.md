@@ -40,14 +40,12 @@ encoder layer는 multi-head self-attention과 FFN으로 구성되어 있다. enc
 
 loss 계산할 때 permutation을 구하기 때문에, 이에 invariant 하도록 각 attention layer의 인풋으로 positional encoding을 추가한다. 
 
+## Transformer Decoder
+N object queries(처음에는 0으로 초기화)를 통해 output embedding이 생성된다. 이때 위에서 말한 대로 permutation-invariant를 위해 positional encoding이 사용되며, 각 embedding은 각기 다른 object를 의미한다. output은 FFN을 통해 N개의 box coordinates와 class label이 된다. 
+
 > 각 channel(d)은 각각 이미지의 다른 특징 정보를 갖고 있다. 이미지를 하나의 context, featuremap의 한 channel을 하나의 단어로 생각을 해야한다. 이 channel들은 self-attention을 통해, 전체 channel과 어떤 연관을 갖고 있는지에 대한 정보를 포함하여 encoding이 된다. 그 후 decoder에서는 각 encoder의 아웃풋(channels)에 attention을 적용하여, 적당한 특징들로 조합된 object를 예측하게 된다. 라는 것이 Transformer을 사용한 이유가 아닐까..
 
-## Transformer Decoder
-
-
-
-
-## Transformer
+ground-truth의 object와 동일한 개수의 object를 예측할 수 있도록 FFN과 위의 Hungarian loss는 각 decoder layer에 계산되어진다(quxiliary decoding losses). 이때 FFN은 parameter을 공유된다. 
 
 ## Experiments
 ### Datasets
