@@ -47,6 +47,10 @@ N object queries(처음에는 0으로 초기화)를 통해 output embedding이 �
 
 ground-truth의 object와 동일한 개수의 object를 예측할 수 있도록 FFN과 위의 Hungarian loss는 각 decoder layer에 계산되어진다(quxiliary decoding losses). 이때 FFN은 parameter을 공유된다. 
 
+![Fig:3](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/detr/fig3.PNG){: width="70%"}
+
+위 figure은 Appendix로 제공되는 DETR의 자세한 구조이다.
+
 ## Experiments
 ### Datasets
 
