@@ -51,11 +51,9 @@ ground-truth의 object와 동일한 개수의 object를 예측할 수 있도록 
 
 위 figure은 Appendix로 제공되는 DETR의 자세한 구조이다.
 
-## Experiments
-### Datasets
-
 ## Review
-> a
+> 깃헙 코드로 실제 학습을 진행해보았는데, 의미있는 성능을 얻기 힘들었다. 하지만 유행하는 Transformer 모델을 가장 직관적이게 사용한 모델인 것 같고, NMS과 같은 post-processing을 제외했다는 점이 흥미로웠다.
 
 ## Reference
-- a
+- [Paper](https://ai.facebook.com/research/publications/end-to-end-object-detection-with-transformers)
+- [Code](https://github.com/facebookresearch/detr)
