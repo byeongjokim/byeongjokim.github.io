@@ -15,23 +15,23 @@ Object Detection 뿐만 아니라 여러 Vision Task에서 **ImageNet으로 학�
 ## Data Augmentation
 본 논문에서는 Data Augmentation을 네단계로 나누어 실험하였다.
 
-1. Augment-S1
+- Augment-S1
     - 가장 약한 Augmentation, Flip과 Crop으로만 구성
-2. Augment-S2
+- Augment-S2
     - 두번째로 약한 Augmentation, Augment-S1에 AutoAugment 추가
-3. Augment-S3
+- Augment-S3
     - 두번째로 강한 Augmentation, Augment-S2에 Large Scale Jittering을 추가
-4. Augment-S4
+- Augment-S4
     - 가장 강한 Augmentation, Large Scale Jittering과 RandAugment 그리고 Flip, Crop으로 구성
 
 ## Pre-training
 세가지의 weight을 사용하여 실험하였다.
 
-1. Rand Init
+- Rand Init
     - pre-train 없이 랜덤으로 초기화된 weights 사용
-2. ImageNet Init
+- ImageNet Init
     - ImageNet으로 학습된 weights 사용(84.5% top-1 accuracy)
-3. ImageNet++ Init
+- ImageNet++ Init
     - Noisy Student 방법으로 학습된 weights 사용(86.9% top-1 accuracy)
 
 ## Self-training
