@@ -3,7 +3,7 @@ layout: post
 title:  "Paper Reivew - YOLACT: Real-time Instance Segmentation"
 description: Instance segmentation 문제를 real-time으로 해결할 수 없을까? 라는 의문으로 시작이 된다. 여태까지의 instance segmentation 모델은 잘 만들어진 object detection에 병렬적으로 모델을 추가하여 (e.g., mask R-CNN(Faster R-CNN), FCIS(R-FCN) 발전하였다.
 date:   2020-01-17 16:35:36 +0900
-categories: Paper
+categories: [Deep_Learning, Paper]
 ---
 ICCV 2019에 발표된 논문이며, Official Code는 PyTorch로 구현되어있다. ([Arxiv](https://arxiv.org/abs/1904.02689) || [Code](https://github.com/dbolya/yolact))
 
