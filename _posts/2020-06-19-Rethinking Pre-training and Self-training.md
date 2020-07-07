@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Paper Reivew - Rethinking Pre-training and Self-training"
+title:  "논문 리뷰 - Rethinking Pre-training and Self-training"
 description: Pre-training과 Data Augmentation, 그리고 Self-training에 대한 실험
 date:   2020-06-23 20:03:00 +0900
 categories: Paper

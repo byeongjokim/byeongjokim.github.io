@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Paper Reivew - End-to-End Object Detection with Transformers"
+title:  "논문 리뷰 - End-to-End Object Detection with Transformers"
 description: Facebook Research에서 발표한 Object Detection 모델
 date:   2020-06-11 20:03:00 +0900
 categories: Paper

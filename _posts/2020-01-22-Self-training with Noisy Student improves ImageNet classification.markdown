@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Paper Reivew - Self-training with Noisy Student improves ImageNet classification"
+title:  "논문 리뷰 - Self-training with Noisy Student improves ImageNet classification"
 description: ImageNet에 속하지 않은 unlabeled images 까지 이용하여 ImageNet 정확성의 SOTA를 갱신하며, robustness 성능 까지 높이는 방법에 대해 설명한다.
 date:   2020-01-23 16:35:36 +0900
 categories: Paper
