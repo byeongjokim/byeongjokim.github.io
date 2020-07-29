@@ -1,11 +1,13 @@
 ---
 layout: post
-title:  "MLOps - Kubernetes 와 Kubeflow 설치하기 #1"
-description: 쿠버네티스 설치
+title:  "MLOps - Kubeflow 설치하기 #1"
+description: Kubeflow 설치
 date:   2020-07-23 20:03:00 +0900
 categories: Kubernetes
 use_math: true
 ---
+
+
 
 
 ## References
