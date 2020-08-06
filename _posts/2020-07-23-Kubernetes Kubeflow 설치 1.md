@@ -7,6 +7,11 @@ categories: Kubernetes
 use_math: true
 ---
 
+> 본 포스팅은 [지구별 여행자](https://www.kangwoo.kr/2020/02/17/pc%EC%97%90-kubeflow-%EC%84%A4%EC%B9%98%ED%95%98%EA%B8%B0-1%EB%B6%80-nvidia-%EB%93%9C%EB%9D%BC%EC%9D%B4%EB%B2%84-docker-%EC%84%A4%EC%B9%98%ED%95%98%EA%B8%B0/)를 보고 겪은 시행착오를 담았습니다.
+
+
+
+
 
 ## References
 - [Kubernetes](https://kubernetes.io/docs/home/)
