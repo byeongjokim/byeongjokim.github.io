@@ -13,15 +13,21 @@ use_math: true
 
 Kubeflow 설치를 위해 블로그, medium 등 많은 자료를 뒤적이며 설치해봤지만, 항상 에러를 맛보았다. 본 포스팅에는 대표적으로 어떤 에러가 있었고, 어떻게 해결했는지에 대해 적어본다.
 
-1. Kubeflow 설치 시 반복되는 Error
-kfctl을 설치 후, **kfctl apply -f kfctl_istio_~~.yaml** 을 통해 istio 기반 kubeflow 설치 해야하는 단계가 있다. 하지만 **webhook.cert-manager.io** 설치가 진행되는 도중 에러가 생겨, 계속 retry 할 때가 있다. 이 retry가 5번 이상 반복되는 것을 기다리면 자동으로 해결이 된다. 하지만 **config.webhook.serving.knative.dev** 설치 중 무한히 에러가 반복될 때가 있다. 
+### Kubeflow 설치 시 반복되는 Error
+kfctl을 설치 후, **kfctl apply -f kfctl_istio_~~.yaml** 을 통해 istio 기반 kubeflow 설치 해야하는 단계가 있다.
 
-결론부터 얘기를 하자면, 이는 주로 kubeflow를 재설치 할 때 생기는 문제이다. kubeflow을 재설치 하기위해 **kfctl delete -f kfctl_istio_~~.yaml**를 할 경우 관련 모든 resource들이 꺠끗하게 지워지지 않는다. 우선 namespace 부터 terminating stuck이 생긴다. 이는 [delete namespace](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.2.0/troubleshoot/ns_terminating.html)을 참고하면 해결할 수 있다. 하지만, namespace에 관련된 모든 pod, svc, deploy 등을 지웠다 해도, kube-system 등의 namespace에 존재하는 자원들, 혹은 pvc, crd 등은 또 따로 삭제를 해야한다. [Kubeflow Github Issue](https://github.com/kubeflow/kubeflow/issues/3767)를 보면 어느정도 삭제를 할 수 있지만, [쿠브플로우 쿠버네티스에서 머신러닝이 처음이라면!](http://www.kyobobook.co.kr/product/detailViewKor.laf?mallGb=KOR&barcode=9788960883055) 책을 통해 좋은 [code](https://github.com/mojokb/kubeflow-book/blob/master/uninstall/kubeflow-uninstall.txt)를 발견하였다.
+하지만 **webhook.cert-manager.io** 설치가 진행되는 도중 에러가 생겨, 계속 retry 할 때가 있다. 이 retry가 5번 이상 반복되는 것을 기다리면 자동으로 해결이 된다. 하지만 **config.webhook.serving.knative.dev** 설치 중 무한히 에러가 반복될 때가 있다. 
+
+결론부터 얘기를 하자면, 이는 주로 kubeflow를 재설치 할 때 생기는 문제이다. kubeflow을 재설치 하기위해 **kfctl delete -f kfctl_istio_~~.yaml**를 할 경우 관련 모든 resource들이 꺠끗하게 지워지지 않는다.
+
+우선 namespace 부터 terminating stuck이 생긴다. 이는 [delete namespace](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.2.0/troubleshoot/ns_terminating.html)을 참고하면 해결할 수 있다.
+
+하지만, namespace에 관련된 모든 pod, svc, deploy 등을 지웠다 해도, kube-system 등의 namespace에 존재하는 자원들, 혹은 pvc, crd 등은 또 따로 삭제를 해야한다. [Kubeflow Github Issue](https://github.com/kubeflow/kubeflow/issues/3767)를 보면 어느정도 삭제를 할 수 있지만, [쿠브플로우 쿠버네티스에서 머신러닝이 처음이라면!](http://www.kyobobook.co.kr/product/detailViewKor.laf?mallGb=KOR&barcode=9788960883055) 책을 통해 좋은 [code](https://github.com/mojokb/kubeflow-book/blob/master/uninstall/kubeflow-uninstall.txt)를 발견하였다.
 
 위 code를 통해 kubeflow, istio 등 과 관련된 resource를 지우고 다시 설치해보면 **config.webhook.serving.knative.dev** 에러 없이 설치가 완료되는 것을 확인할 수 있다.
 
-2. istio-proxy OOMKilled
-Kubeflow 설치가 완료된 후 설치된 pod 등을 확인해보면, istio-system namespace 안에 주기적인 에러로 계속 재시작되는 pod(istio-policy를 포함한)을 확인할 수 있다. 이는 공통된 하나의 container에서 OOMKilled error가 발생해서 생긴 일이다. 해당 pod 들을 kubectl describe 명령어로 살펴보면 모두 istio-proxy container를 사용한다. 
+### istio-proxy OOMKilled
+Kubeflow 설치가 완료된 후 설치된 pod 등을 확인해보면, istio-system namespace 안에 주기적인 에러로 계속 재시작되는 pod(istio-policy를 포함한)을 확인할 수 있다. 이는 공통된 하나의 container에서 OOMKilled error가 발생해서 생긴 일이다. 해당 pod 들을 kubectl describe 명령어로 살펴보면 모두 **istio-proxy** container를 사용한다. 
 
 ```
 istio-proxy:
