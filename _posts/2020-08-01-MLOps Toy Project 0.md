@@ -3,7 +3,7 @@ layout: post
 title:  "MLOps - Toy Project #0"
 description: Kubeflow를 통한 MLOps
 date:   2020-08-01 00:00:00 +0900
-categories: Kubernetes
+categories: MLOps_Project
 use_math: true
 ---
 

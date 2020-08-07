@@ -1,4 +1,4 @@
 ---
 layout: category  
-title: CI/CD
+title: MLOps
 ---

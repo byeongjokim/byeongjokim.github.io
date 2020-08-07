@@ -3,7 +3,7 @@ layout: post
 title:  "[ECCV2020] - VIPriors Workshop Challenge(Image Classification) 3rd 후기"
 description: VIPriors Workshop Challenge 후기
 date:   2020-07-24 20:03:00 +0900
-categories: Others
+categories: Life
 use_math: true
 ---
 
