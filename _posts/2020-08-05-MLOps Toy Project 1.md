@@ -7,7 +7,7 @@ categories: MLOps_Project
 use_math: true
 ---
 
-![pipeline](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/mlops1/pipeline.png){: width="60%"}
+![pipeline](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/mlops1/pipeline.png){: width="100%"}
 
 ## References
 - [Kubernetes](https://kubernetes.io/docs/home/)
