@@ -11,12 +11,17 @@ use_math: true
 
 kubernetes와 kubeflow 설치는 Reference의 지구별 여행자 블로그를 참고하였다. 설치하면서 생긴 에러들은 이전 [포스팅](https://byeongjokim.github.io/posts/Kubeflow-%EC%84%A4%EC%B9%98/)에 적어 놓았다. 아래는 사용하고 있는 쿠버네티스 서버 환경과 버전 정보이며, 프로젝트를 진행하면서 설치한 모든 것의 버전 정보를 이 곳에 추가해 나갈 것이다.
 
-## 클러스터 
-- 1 master node (CentOS 7.6)
-- 2 worker node (CentOS 7.6)
+## Server
+- Development + Jenkins + Kafka Server
+    - n1-standard-1 (CentOS 7.8)
+- Training + Production + Data Engineering Server
+    - 1 master node (n1-standard-2, CentOS 7.8)
+    - 1 worker node (n1-standard-2, CentOS 7.8)
+- Data (Feature Store, ML Metadata Store, Trained Model Weight) Server
+    - NFS
 
 ## kubernetes & kubeflow 
-- Kubernetes: kubeadm v1.15.3
+- Kubernetes: kubeadm v1.18.6
 - CNI: Calico
 - Kubeflow: kfctl_k8s_istio_v1.0.0.yaml
 - istio: v1.4.2
@@ -31,5 +36,3 @@ kubernetes와 kubeflow 설치는 Reference의 지구별 여행자 블로그를 �
     - [어쩐지 오늘은](https://zzsza.github.io/category/mlops/)
 - 쿠버네티스 설치
     - [지구별 여행자](https://www.kangwoo.kr/2020/02/17/pc%EC%97%90-kubeflow-%EC%84%A4%EC%B9%98%ED%95%98%EA%B8%B0-1%EB%B6%80-nvidia-%EB%93%9C%EB%9D%BC%EC%9D%B4%EB%B2%84-docker-%EC%84%A4%EC%B9%98%ED%95%98%EA%B8%B0/)
-    - 
-
