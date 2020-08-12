@@ -21,7 +21,7 @@ Toy Project
     - 지속적인 성능 모니터링
     - CI/CD/CT 사용(Jenkins)
 
-우선 전체 파이프라인에 대해 설계를 해야한다. Google Cloud Platform의 [MLOps CI/CD/CT Pipelines](https://cloud.google.com/solutions/machine-learning/mlops-continuous-delivery-and-automation-pipelines-in-machine-learning) 에서는 3 단계의 ML 파이프라인을 소개한다. 이 중 **Ci/CD/CT 의 자동화**가 가능한 마지막 레벨의 파이프라인을 참고하여 약간 변형된? (거의 동일한) pipeline을 그려보았다.
+우선 전체 파이프라인에 대해 설계를 해야한다. Google Cloud Platform의 [MLOps CI/CD/CT Pipelines](https://cloud.google.com/solutions/machine-learning/mlops-continuous-delivery-and-automation-pipelines-in-machine-learning) 에서는 3 단계의 ML 파이프라인을 소개한다. 이 중 **CI/CD/CT 의 자동화**가 가능한 마지막 레벨의 파이프라인을 참고하여 약간 변형된? (거의 동일한) pipeline을 그려보았다.
 
 ![pipeline](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/mlops1/pipeline.png){: width="100%"}
 
@@ -45,17 +45,19 @@ ML Model은 학습으로만 끝나는 것이 아니라, **Evaluation**, **Valida
 ML Model을 학습할 때 여러 Hyper Parameter들이 사용된다. 그리고 이것들에 따라 ML Model의 성능이 좌우된다. 따라서, 각 모델의 Hyper Parameter을 **ML Metatdata Store** 라는 저장소에 저장을 하여, 모델에 따른 Hyper Parameter version 관리 및 엑세스가 가능해야 한다.
 
 ### Model Store
-ML Model이 학습 된 후 inference 되기 위해서는 Weight 파일이 저장되어야 한다. 이는 Github, File Cloud 서비스, 혹은 서버를 통해 version 관리가 가능하다. 이번 프로젝트에는 weight 파일은 Google Drive에, 버전 정보는 Github에 관리를 할 예정이다.
+ML Model이 학습 된 후 inference 되기 위해서는 Weight 파일이 저장되어야 한다. 이는 Github, File Cloud 서비스, 혹은 서버를 통해 version 관리가 가능하다. 이번 프로젝트에는 버전, weight 위치 등 관련 JSON 파일을 Github로 관리 할 예정이다.
 
-각 pipeline의 요소들을 위해 6개의 서버를 사용 할 것이다.
-- Data Server: feature 저장
-- Development Server: 소스 코드 개발
-- Training Server: 모델 학습(GPU 서버)
-- Jenkins Server: CI/CD 수행
-- Productino Server: 배포
-- Kafka Server: 새로운 데이터 공급
-
-물론 Toy Project로 진행 될 것이기 때문에, 6개의 서버를 모두 구축하기는 힘들고, 몇몇 요소들은 docker화 시켜 서버를 통합하여 실습해 볼 것이다.
+각 pipeline의 요소 별로 서버를 나누고 싶지만, 여건상 4개의 서버를 사용 할 것이다.
+- Development + Jenkins(CI/CD) Server
+    - 소스 코드 개발 및 CI/CD 수행
+- Training + Production + Data Engineering Server
+    - Kubernetes (1 Master, 1 Worker)
+    - 모델 학습, 배포 및 데이터 preprocessing
+- Data (Feature Store, ML Metadata Store, Trained Model Weight) Server
+    - NFS
+    - 데이터 및 아티팩트 저장
+- Kafka Server
+    - 신규 학습 데이터 전송
 
 ## References
 - [Kubernetes](https://kubernetes.io/docs/home/)
