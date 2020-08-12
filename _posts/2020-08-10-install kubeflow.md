@@ -7,7 +7,7 @@ categories: MLOps
 use_math: true
 ---
 
-CentOS 7.8에 kubernetes with Calico와 kubeflow을 설치하는 스크립트만 모아놓았습니다.
+Google Cloud Engine VM 인스턴스 CentOS 7.8에 kubernetes with Calico와 kubeflow을 설치하는 스크립트만 모아놓았습니다.
 
 ## 서버 환경 세팅 (Master, Worker node)
 ```
@@ -55,9 +55,8 @@ $ sudo reboot
 ```
 
 ### Master Node
-CNI로 [Calico](https://docs.projectcalico.org/getting-started/kubernetes/quickstart) 사용
-
 ```
+# CNI로 [Calico](https://docs.projectcalico.org/getting-started/kubernetes/quickstart) 사용
 $ sudo kubeadm init --pod-network-cidr=192.168.0.0/16
 $ mkdir -p $HOME/.kube
 $ sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
@@ -67,9 +66,8 @@ $ kubectl create -f https://docs.projectcalico.org/manifests/custom-resources.ya
 ```
 
 ### Worker Node
-마스터 노드에서 sudo kubeadm init --pod-network-cidr=192.168.0.0/16 명령어 실행 후 출력된 명령어 실행
-
 ```
+# 마스터 노드에서 sudo kubeadm init --pod-network-cidr=192.168.0.0/16 명령어 실행 후 출력된 명령어 실행
 $ kubeadm join x.x.x.x:x --token 7r5792.5xuktr48txdrwnbj --discovery-token-ca-cert-hash sha256:xxxxxxxxxxxxxxxxxxxxxxxxxxx
 ```
 
