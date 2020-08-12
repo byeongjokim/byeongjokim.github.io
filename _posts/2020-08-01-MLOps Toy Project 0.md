@@ -13,7 +13,7 @@ kubernetes와 kubeflow 설치는 Reference의 지구별 여행자 블로그를 �
 
 ## 클러스터 
 - 1 master node (CentOS 7.6)
-- 3 worker GPU node (CentOS 7.6)
+- 2 worker node (CentOS 7.6)
 
 ## kubernetes & kubeflow 
 - Kubernetes: kubeadm v1.15.3

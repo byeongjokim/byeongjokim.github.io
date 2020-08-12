@@ -7,19 +7,18 @@ categories: MLOps_Project
 use_math: true
 ---
 
-Kubeflow를 이용하여 MLOps를 실습하기 위한 프로젝트인 만큼 여러 상황을 가정하고, 제약을 두어서 진행하려고 한다. 모델은 최대한 학습하는데 많은 시간 및 자원을 소모하지 않는(하지만 흥미가 있는) 선에서 결정하였다. 그리고 Kafka, Jenkins 등 여러 오픈소스를 경험해 볼 것이다.
+Kubeflow를 이용하여 MLOps를 실습하기 위한 프로젝트인 만큼 여러 상황을 가정하고, 제약을 두어서 진행하려고 한다. Google Cloud 서버 무료 버전을 사용하기 때문에 모델은 최대한 학습하는데 많은 시간 및 자원을 소모하지 않는(기본적인 예제) 선에서 결정하였다. 그리고 Kafka, Jenkins 등 여러 오픈소스를 경험해 볼 것이다.
 
 Toy Project
-- 개요: 기존 이미지를 새로운 스타일의 이미지로 변형
-- 사용 모델: GAN
+- 개요: MNIST 이미지 분류
+- 사용 모델: VGG16
 - 인풋 및 아웃풋
     - 인풋: 이미지 n장
-    - 아웃풋: 스타일이 변형된 이미지 n장
+    - 아웃풋: 0 ~ 9 예측
 - 상황 가정 및 제약
     - Docker 및 Kubernetes, Kubeflow 사용
     - 지속적인 새로운 데이터 학습(Kafka)
     - 지속적인 성능 모니터링
-    - 학습 및 배포 시 multi-GPU 사용
     - CI/CD/CT 사용(Jenkins)
 
 우선 전체 파이프라인에 대해 설계를 해야한다. Google Cloud Platform의 [MLOps CI/CD/CT Pipelines](https://cloud.google.com/solutions/machine-learning/mlops-continuous-delivery-and-automation-pipelines-in-machine-learning) 에서는 3 단계의 ML 파이프라인을 소개한다. 이 중 **Ci/CD/CT 의 자동화**가 가능한 마지막 레벨의 파이프라인을 참고하여 약간 변형된? (거의 동일한) pipeline을 그려보았다.
