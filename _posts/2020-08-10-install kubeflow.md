@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Kubernetes & Kubeflow 설치 명령어 모음"
+title:  "CentOs에 Kubernetes & Kubeflow 설치 명령어 모음"
 description: Kubernetes & Kubeflow 설치
 date:   2020-08-10 00:00:00 +0900
 categories: MLOps
