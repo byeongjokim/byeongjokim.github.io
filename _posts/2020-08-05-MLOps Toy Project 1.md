@@ -47,17 +47,17 @@ ML Model을 학습할 때 여러 Hyper Parameter들이 사용된다. 그리고 �
 ### Model Store
 ML Model이 학습 된 후 inference 되기 위해서는 Weight 파일이 저장되어야 한다. 이는 Github, File Cloud 서비스, 혹은 서버를 통해 version 관리가 가능하다. 이번 프로젝트에는 버전, weight 위치 등 관련 JSON 파일을 Github로 관리 할 예정이다.
 
-각 pipeline의 요소 별로 서버를 나누고 싶지만, 여건상 4개의 서버를 사용 할 것이다.
-- Development + Jenkins(CI/CD) Server
-    - 소스 코드 개발 및 CI/CD 수행
+각 pipeline의 요소 별로 서버를 나누고 싶지만, 여건상 3개의 서버를 사용 할 것이다.
+- Development + Jenkins + Kafka Server
+    - 소스 코드 개발
+    - CI/CD 수행
+    - 신규 학습 데이터 전송
 - Training + Production + Data Engineering Server
     - Kubernetes (1 Master, 1 Worker)
     - 모델 학습, 배포 및 데이터 preprocessing
 - Data (Feature Store, ML Metadata Store, Trained Model Weight) Server
     - NFS
     - 데이터 및 아티팩트 저장
-- Kafka Server
-    - 신규 학습 데이터 전송
 
 ## References
 - [Kubernetes](https://kubernetes.io/docs/home/)
