@@ -73,7 +73,7 @@ $ kubectl create -f https://docs.projectcalico.org/manifests/custom-resources.ya
 $ kubeadm join x.x.x.x:x --token 7r5792.5xuktr48txdrwnbj --discovery-token-ca-cert-hash sha256:xxxxxxxxxxxxxxxxxxxxxxxxxxx
 ```
 
-### Kubeflow v1.0.0 설치
+## Kubeflow 설치 (v1.0.0)
 ```
 $ kubectl apply -f https://raw.githubusercontent.com/rancher/local-path-provisioner/master/deploy/local-path-storage.yaml
 $ kubectl patch storageclass local-path -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'
