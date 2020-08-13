@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "CentOs에 Kubernetes & Kubeflow 설치 명령어 모음"
+title:  "CentOs Kubernetes & Kubeflow install Command Lines"
 description: Kubernetes & Kubeflow 설치
 date:   2020-08-10 00:00:00 +0900
 categories: MLOps
@@ -9,7 +9,7 @@ use_math: true
 
 Google Cloud Engine VM 인스턴스 CentOS 7.8에 kubernetes with Calico와 kubeflow을 설치하는 스크립트만 모아놓았습니다.
 
-## 서버 환경 세팅 (Master, Worker node)
+## Server Settings (Both Master, Worker node)
 ```
 $ sudo setenforce 0
 $ sudo sed -i --follow-symlinks 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/sysconfig/selinux
@@ -19,14 +19,14 @@ $ sudo modprobe br_netfilter
 $ sudo swapoff -a
 ```
 
-## Docker 설치 (Master, Worker node)
+## Docker Install (Both Master, Worker node)
 ```
 $ sudo yum install -y yum-utils device-mapper-persistent-data lvm2
 $ sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
 $ sudo yum install -y docker-ce
 ```
 
-## Kubernetese 설치 (Master, Worker node)
+## Kubernetese Install (Both Master, Worker node)
 ```
 $ sudo vi /etc/yum.repos.d/kubernetes.repo
 
@@ -54,7 +54,7 @@ $ sysctl --system
 $ sudo reboot
 ```
 
-### Master Node
+### Master node Only
 ```
 # CNI로 [Calico](https://docs.projectcalico.org/getting-started/kubernetes/quickstart) 사용
 $ sudo kubeadm init --pod-network-cidr=192.168.0.0/16
@@ -65,13 +65,13 @@ $ kubectl create -f https://docs.projectcalico.org/manifests/tigera-operator.yam
 $ kubectl create -f https://docs.projectcalico.org/manifests/custom-resources.yaml
 ```
 
-### Worker Node
+### Worker node Only
 ```
 # 마스터 노드에서 sudo kubeadm init --pod-network-cidr=192.168.0.0/16 명령어 실행 후 출력된 명령어 실행
 $ kubeadm join x.x.x.x:x --token 7r5792.5xuktr48txdrwnbj --discovery-token-ca-cert-hash sha256:xxxxxxxxxxxxxxxxxxxxxxxxxxx
 ```
 
-## Kubeflow 설치 (v1.0.0)
+## Kubeflow Install (v1.0.0 + istio)
 ```
 $ kubectl apply -f https://raw.githubusercontent.com/rancher/local-path-provisioner/master/deploy/local-path-storage.yaml
 $ kubectl patch storageclass local-path -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'
