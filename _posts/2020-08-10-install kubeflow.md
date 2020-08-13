@@ -7,7 +7,7 @@ categories: MLOps
 use_math: true
 ---
 
-Google Cloud Engine VM 인스턴스 CentOS 7.8에 kubernetes with Calico와 kubeflow을 설치하는 스크립트만 모아놓았습니다.
+다른 설명 없이 Google Cloud Engine VM 인스턴스 CentOS 7.8에 kubernetes with Calico와 kubeflow을 설치하는 Command Line만 모아놓았습니다.
 
 ## Server Settings (Both Master, Worker node)
 ```
