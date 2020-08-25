@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "MLOps - Toy Project #2"
-description: Dev Server 환경 세팅 및 테스트
+description: Jenkins CI/CD using Docker
 date:   2020-08-14 00:00:00 +0900
 categories: MLOps_Project
 use_math: true
@@ -25,6 +25,35 @@ $ yum install docker-ce
 $ sudo systemctl start docker && systemctl enable docker
 ```
 
+## Jenkins install using Dockerfile
+```
+FROM jenkins/jenkins:lts
+USER 0
+RUN apt-get update && \
+    apt-get -y install apt-transport-https \
+        ca-certificates \
+        curl \
+        gnupg2 \
+        software-properties-common && \
+    curl -fsSL https://download.docker.com/linux/$(. /etc/os-release; echo "$ID")/gpg > /tmp/dkey; apt-key add /tmp/dkey && \
+    add-apt-repository \
+        "deb [arch=amd64] https://download.docker.com/linux/$(. /etc/os-release; echo "$ID") \
+        $(lsb_release -cs) \
+        stable" && \
+    apt-get update && \
+    apt-get -y install docker-ce
+```
+```
+# docker build/run jenkins images
+# jenkins container에 tcp로 접속하기 위해 docker.sock 설정
+$ sudo docker build -t byeongjokim/jenkins .
+$ sudo docker run -d -p 8080:8080 -v /var/run/docker.sock:/var/run/docker.sock --name jenkins byeongjokim/jenkins
+```
+
+## CD (Continuous Delivery) to Docker Hub using Github Webhook
+
+
+
 # TODO
 
 ## References
@@ -40,4 +69,8 @@ $ sudo systemctl start docker && systemctl enable docker
 - MLOps
     - [MLOps CI/CD/CT Pipelines](https://cloud.google.com/solutions/machine-learning/mlops-continuous-delivery-and-automation-pipelines-in-machine-learning)
     - [Blog 1](https://growingdata.com.au/mlops-ci-cd-for-machine-learning-pipelines-model-deployment-with-kubeflow/?preview=true&_thumbnail_id=5121)
+- Jenkins
+    - [Install](https://shmoon.tistory.com/11)
+    - [How to](https://www.youtube.com/watch?v=nMLQgXf8tZ0)
+
 
