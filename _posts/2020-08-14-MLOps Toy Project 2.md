@@ -103,6 +103,7 @@ pipeline{
 각 코드에 맞는 dockerfile을 만들면 된다.
 
 이제 Github에 push를 하면 자동으로 Docker build가 이루어지며, Docker Hub에 push가 이루어진다.
+![result](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/toy2/result.PNG)
 
 ## References
 - Jenkins
