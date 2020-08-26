@@ -51,26 +51,64 @@ $ sudo docker run -d -p 8080:8080 -v /var/run/docker.sock:/var/run/docker.sock -
 ```
 
 ## CD (Continuous Delivery) to Docker Hub using Github Webhook
+Github Master branch에 PUSH가 이루어지면 자동으로 Docker Build/Push 가 이루어지게 하기 위해 Jenkins Pipeline을 설정하였다.
 
+### Github Webhook Setting
+![settings0](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/toy2/github_settings1.PNG)
 
+### Jenkins Pipeline Setting
+![settings1](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/toy2/pipline_settings1.PNG)
+![settings2](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/toy2/pipline_settings2.PNG)
 
-# TODO
+### Install Jenkins Plugin
+- CloudBees Docker Build and Publish plugin
+- GitHub Integration Plugin
+
+### Jenkins Credentials Setting
+![settings1](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/toy2/jenkins_settings.PNG)
+
+### Create Jenkinsfile
+```
+pipeline{
+    agent any
+    stages{
+        stage("Checkout Code"){
+            steps{
+                script{
+                    checkout scm
+                }
+            }
+        }
+        stage("Docker Build"){
+            steps{
+                script{
+                    app = docker.build("byeongjokim/toy-project")
+                }
+            }
+        }
+        stage("Docker Push"){
+            steps{
+                script{
+                    docker.withRegistry('https://registry.hub.docker.com', 'dockerHub'){
+                        app.push()
+                    }
+                }
+            }
+        }
+    }
+}
+```
+
+### Create dockerfile
+각 코드에 맞는 dockerfile을 만들면 된다.
+
+이제 Github에 push를 하면 자동으로 Docker build가 이루어지며, Docker Hub에 push가 이루어진다.
 
 ## References
-- [Kubernetes](https://kubernetes.io/docs/home/)
-- [Kubeflow](https://www.kubeflow.org/docs/)
-- 쿠버네티스 네트워크 개념
-    - [IBM Developer 밋업 쿠버네티스 차근차근 다지기](https://www.youtube.com/watch?v=l42GttmnnZ4)
-    - [쿠버네티스 연구회](https://www.youtube.com/watch?v=q1k_iOB3yig)
-    - [커피고래의 노트](https://coffeewhale.com/)
-    - [어쩐지 오늘은](https://zzsza.github.io/category/mlops/)
-- 쿠버네티스 설치
-    - [지구별 여행자](https://www.kangwoo.kr/2020/02/17/pc%EC%97%90-kubeflow-%EC%84%A4%EC%B9%98%ED%95%98%EA%B8%B0-1%EB%B6%80-nvidia-%EB%93%9C%EB%9D%BC%EC%9D%B4%EB%B2%84-docker-%EC%84%A4%EC%B9%98%ED%95%98%EA%B8%B0/)
-- MLOps
-    - [MLOps CI/CD/CT Pipelines](https://cloud.google.com/solutions/machine-learning/mlops-continuous-delivery-and-automation-pipelines-in-machine-learning)
-    - [Blog 1](https://growingdata.com.au/mlops-ci-cd-for-machine-learning-pipelines-model-deployment-with-kubeflow/?preview=true&_thumbnail_id=5121)
 - Jenkins
     - [Install](https://shmoon.tistory.com/11)
     - [How to](https://www.youtube.com/watch?v=nMLQgXf8tZ0)
+    - [Docker Build](https://www.youtube.com/watch?v=z32yzy4TrKM)
+    - [Pipeline](https://dzone.com/articles/adding-a-github-webhook-in-your-jenkins-pipeline)
 
 
