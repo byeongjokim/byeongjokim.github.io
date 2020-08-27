@@ -50,7 +50,7 @@ $ sudo docker build -t byeongjokim/jenkins .
 $ sudo docker run -d -p 8080:8080 -v /var/run/docker.sock:/var/run/docker.sock --name jenkins byeongjokim/jenkins
 ```
 
-## CD (Continuous Delivery) to Docker Hub using Github Webhook
+## CI/CD to Docker Hub using Github Webhook
 Github Master branch에 PUSH가 이루어지면 자동으로 Docker Build/Push 가 이루어지게 하기 위해 Jenkins Pipeline을 설정하였다.
 
 ### Github Webhook Setting
@@ -63,6 +63,7 @@ Github Master branch에 PUSH가 이루어지면 자동으로 Docker Build/Push �
 ### Install Jenkins Plugin
 - CloudBees Docker Build and Publish plugin
 - GitHub Integration Plugin
+- Docker
 
 ### Jenkins Credentials Setting
 ![settings1](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/toy2/jenkins_settings.PNG)
@@ -77,6 +78,13 @@ pipeline{
                 script{
                     checkout scm
                 }
+            }
+        }
+        stage("Unit Test"){
+            agent { docker { image 'python:3.6-alpine' } }
+            steps{
+                sh 'pip install flask'
+                sh 'python test.py'
             }
         }
         stage("Docker Build"){
@@ -100,7 +108,14 @@ pipeline{
 ```
 
 ### Create dockerfile
-각 코드에 맞는 dockerfile을 만들면 된다.
+```
+FROM python:3.6-alpine
+RUN pip install flask
+COPY . /app
+WORKDIR /app
+ENTRYPOINT ["python"]
+CMD ["app.py"]
+```
 
 이제 Github에 push를 하면 자동으로 Docker build가 이루어지며, Docker Hub에 push가 이루어진다.
 ![result](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/toy2/result.PNG)
