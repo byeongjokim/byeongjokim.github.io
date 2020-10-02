@@ -12,13 +12,17 @@ use_math: true
 kubernetes와 kubeflow 설치는 Reference의 지구별 여행자 블로그를 참고하여 [포스팅](https://byeongjokim.github.io/posts/install-kubeflow/)하였다. 특수한 환경에서 설치하면서 생긴 에러들은 이전 [포스팅](https://byeongjokim.github.io/posts/Kubeflow-%EC%84%A4%EC%B9%98/)에 적어 놓았다. 아래는 사용하고 있는 쿠버네티스 서버 환경과 버전 정보이며, 프로젝트를 진행하면서 설치한 모든 것의 버전 정보를 이 곳에 추가해 나갈 것이다.
 
 ## Server
-- Development + Jenkins + Kafka Server
+- Development + Jenkins + Kafka + Data (Feature Store, ML Metadata Store, Trained Model Weight) Server
     - n1-standard-1 (CentOS 7.8)
-- Training + Production + Data Engineering Server
+- Training + Production Server
     - 1 master node (n1-standard-2, CentOS 7.8)
     - 1 worker node (n1-standard-2, CentOS 7.8)
-- Data (Feature Store, ML Metadata Store, Trained Model Weight) Server
-    - NFS
+
+## CI/CD/CT
+- Github
+- Jenkins
+- Docker
+- Jenkins
 
 ## kubernetes & kubeflow 
 - Kubernetes: kubeadm v1.18.6
