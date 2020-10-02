@@ -13,8 +13,8 @@ Toy Project
 - 개요: Linear Regression
 - 사용 딥러닝 기법: Fully Connected Layer + Activation function
 - 인풋 및 아웃풋
-    - 인풋: X, Y data가 있는 csv 파일
-    - 아웃풋: Linear Function Weight 파일
+    - 인풋: X data
+    - 아웃풋: Y data
 - 상황 가정 및 제약
     - Docker 및 Kubernetes, Kubeflow 사용
     - 지속적인 새로운 데이터 학습(Kafka)
