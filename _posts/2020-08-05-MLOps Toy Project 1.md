@@ -15,6 +15,8 @@ Toy Project
 - 인풋 및 아웃풋
     - 인풋: X data
     - 아웃풋: Y data
+- data
+    - CSV 파일로 구성
 - 상황 가정 및 제약
     - Docker 및 Kubernetes, Kubeflow 사용
     - 지속적인 새로운 데이터 학습(Kafka)
