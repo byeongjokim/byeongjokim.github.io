@@ -26,7 +26,8 @@ use_math: true
 
 ## Master
 Flask를 사용하여 일 분배하는 master service를 구현
-### run.py
+
+**run.py**
 ```python
 @app.route("/start")
 def start():
@@ -62,7 +63,7 @@ def fin_job():
 - 일이 끝난 worker는 /fin_job 을 통해 보고를 할 수 있다.
     - 일이 마무리가 안된 경우 다시 jobs에 append 시킨다.
 
-### Dockerfile
+**Dockerfile**
 ```dockerfile
 FROM python:3.6
 RUN pip install flask
@@ -72,7 +73,7 @@ ENTRYPOINT ["python"]
 CMD ["run.py"]
 ```
 
-### master.yaml
+**master.yaml**
 ```yaml
 apiVersion: v1
 kind: Service
@@ -125,7 +126,8 @@ spec:
 
 ## Worker
 일이 없을 때 까지 master에게 일을 요청하는 worker을 구현. 주어진 일이 없으면 종료되어야 하므로 ReplicaSet 이 아닌 **Job** 을 이용.
-### run.py
+
+**run.py**
 ```python
 # load DL model
 MODEL_WEIGHT = os.getenv('MODEL_WEIGHT', "/MODEL/WEIGHT.pth")
@@ -168,7 +170,7 @@ def main():
 - 일 요청 -> 일 처리 -> 일 보고
 - 일이 없으면 종료
 
-### Dockerfile
+**Dockerfile**
 ```dockerfile
 FROM pytorch/pytorch:1.4-cuda10.1-cudnn7-runtime
 RUN apt-get update
@@ -183,7 +185,7 @@ ENTRYPOINT ["python"]
 CMD ["run.py"]
 ```
 
-### worker.yaml
+**worker.yaml**
 ```yaml
 apiVersion: batch/v1
 kind: Job
