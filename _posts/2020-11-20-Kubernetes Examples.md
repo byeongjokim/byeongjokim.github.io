@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  "MLOps - Large Video Processing using Kubernetes"
+title:  "MLDev - Large Video Processing using Kubernetes"
 description: Blur all faces in 300h videos
 date:   2020-11-20 00:00:00 +0900
-categories: MLOps_Project
+categories: Development
 use_math: true
 ---
 
