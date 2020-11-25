@@ -119,7 +119,7 @@ spec:
           path: /videos/path/
 ```
 - **type: LoadBalancer**: LoadBalancer을 이용하여 서비스
-- **replicas: 1**: replica는 1로 두었다. jobs 리스트를 전역 변수로 사용하고 있기 때문에 독립적인 pod을 사용하게 되면 일을 중복으로 나눠주게 됨.
+- **replicas: 1**: replica는 1로 두었다. jobs 리스트를 전역 변수로 사용하고 있기 때문에 독립적인 pod을 추가로 사용하게 되면 일을 중복으로 나눠주게 됨.
 - **volumes**: 영상이 있는 스토리즈를 hostPath를 통해 마운트.
     - 모든 워커 노드가 스토리지에 접근 할 수 있어야 함.
 
@@ -217,12 +217,13 @@ spec:
           path: /videos/path/
   backoffLimit: 2
 ```
-- **kind: Job**: ReplicaSet의 경우 **restartPolicy: Always** 만 사용해야함
+- **kind: Job**:
+    - ReplicaSet의 경우 **restartPolicy: Always** 만 사용해야함
     - 일이 끝난 worker가 계속 재실행되어서 자원 낭비
-    - **Job** 컨트롤러를 이용하여 일이 끝난 worker는 **completed** 상태로 끝나도록
+    - **Job** 컨트롤러를 이용 -> **restartPlicy: Never**)
 - **env:**: Master_IP, MODEL_WEIGHT, OUTPUT 환경변수를 사용하여 코드 수정 없이 yaml 파일만 수정할 수 있도록
 - **nvidia.com/gpu: 1**: 모델당 GPU 1개의 메모리면 충분 하기 때문에 **limits**을 걸어놓음
-- **volumes**: 영상이 있는 스토리즈를 hostPath를 통해 마운트.
+- **volumes**: 영상이 있는 스토리지를 hostPath를 통해 마운트.
     - 모든 워커 노드가 스토리지에 접근 할 수 있어야 함.
 
 ## 실행 결과
