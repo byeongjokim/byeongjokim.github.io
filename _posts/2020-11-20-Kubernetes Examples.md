@@ -23,9 +23,9 @@ use_math: true
 - Service, Job을 이용하여 Master, Worker 구현
     - Master: 남은 일 체크 및 일 분배
     - Worker: 받은 일 처리 완료 후 일 요청
-- 10 GPU 사용
 
 ## Master
+Flask를 사용하여 일 분배하는 master service를 구현
 ### run.py
 ```python
 @app.route("/start")
@@ -57,10 +57,10 @@ def fin_job():
     - if not status == 1:
         jobs.append(job)
     """
-
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port="8080")
 ```
+- worker들은 /get_job 을 통해 처리해야하는 영상 파일이름을 얻을 수 있다.
+- 일이 끝난 worker는 /fin_job 을 통해 보고를 할 수 있다.
+    - 일이 마무리가 안된 경우 다시 jobs에 append 시킨다.
 
 ### Dockerfile
 ```dockerfile
@@ -118,8 +118,13 @@ spec:
         hostPath:
           path: /videos/path/
 ```
+- **type: LoadBalancer**: LoadBalancer을 이용하여 서비스
+- **replicas: 1**: replica는 1로 두었다. jobs 리스트를 전역 변수로 사용하고 있기 때문에 독립적인 pod을 사용하게 되면 일을 중복으로 나눠주게 됨.
+- **volumes**: 영상이 있는 스토리즈를 hostPath를 통해 마운트.
+    - 모든 워커 노드가 스토리지에 접근 할 수 있어야 함.
 
 ## Worker
+일이 없을 때 까지 master에게 일을 요청하는 worker을 구현. 주어진 일이 없으면 종료되어야 하므로 ReplicaSet 이 아닌 **Job** 을 이용.
 ### run.py
 ```python
 # load DL model
@@ -158,6 +163,10 @@ def main():
         
         set_fin_job(job, status)
 ```
+- 환경변수를 통해 모델의 가중치 파일(MODEL_WEIGHT)의 위치를 받는다.
+- 환경변수를 통해 master(flask)에게 요청을 보낼 수 있는 url을 받는다.
+- 일 요청 -> 일 처리 -> 일 보고
+- 일이 없으면 종료
 
 ### Dockerfile
 ```dockerfile
@@ -167,8 +176,7 @@ RUN apt-get install -y libgl1-mesa-dev
 RUN apt-get install -y libgtk2.0-dev
 RUN apt-get install -y ffmpeg
 RUN pip install opencv-python cmake
-RUN pip install dlib
-RUN pip install ujson
+RUN pip install dlib ujson
 COPY . /app
 WORKDIR /app
 ENTRYPOINT ["python"]
@@ -209,7 +217,23 @@ spec:
           path: /videos/path/
   backoffLimit: 2
 ```
+- **kind: Job**: ReplicaSet의 경우 **restartPolicy: Always** 만 사용해야함
+    - 일이 끝난 worker가 계속 재실행되어서 자원 낭비
+    - **Job** 컨트롤러를 이용하여 일이 끝난 worker는 **completed** 상태로 끝나도록
+- **env:**: Master_IP, MODEL_WEIGHT, OUTPUT 환경변수를 사용하여 코드 수정 없이 yaml 파일만 수정할 수 있도록
+- **nvidia.com/gpu: 1**: 모델당 GPU 1개의 메모리면 충분 하기 때문에 **limits**을 걸어놓음
+- **volumes**: 영상이 있는 스토리즈를 hostPath를 통해 마운트.
+    - 모든 워커 노드가 스토리지에 접근 할 수 있어야 함.
+
+## 실행 결과
+### master 실행 결과
+![master](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/blur/2.png){: width="100%"}
+
+### worker 실행 결과
+![worker](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/blur/1.png){: width="100%"}
+
+### 전처리 결과
+- 20개 영상(총 1시간) 전처리 -> 1시간 반 소모
 
 ## References
-- [커피고래의 노트](https://coffeewhale.com/)
 - [핵심만 콕! 쿠버네티스](http://www.yes24.com/Product/Goods/92426926)
