@@ -220,7 +220,7 @@ spec:
 - **kind: Job**:
     - ReplicaSet의 경우 **restartPolicy: Always** 만 사용해야함
     - 일이 끝난 worker가 계속 재실행되어서 자원 낭비
-    - **Job** 컨트롤러를 이용 -> **restartPlicy: Never**)
+    - **Job** 컨트롤러를 이용 -> **restartPlicy: Never**
 - **env:**: Master_IP, MODEL_WEIGHT, OUTPUT 환경변수를 사용하여 코드 수정 없이 yaml 파일만 수정할 수 있도록
 - **nvidia.com/gpu: 1**: 모델당 GPU 1개의 메모리면 충분 하기 때문에 **limits**을 걸어놓음
 - **volumes**: 영상이 있는 스토리지를 hostPath를 통해 마운트.
