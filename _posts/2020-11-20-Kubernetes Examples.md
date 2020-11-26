@@ -221,6 +221,7 @@ spec:
     - ReplicaSet의 경우 **restartPolicy: Always** 만 사용해야함
     - 일이 끝난 worker가 계속 재실행되어서 자원 낭비
     - **Job** 컨트롤러를 이용 -> **restartPolicy: Never**
+- **parallelism**: 몇개의 pod이 병렬적으로 작업을 할 것인지. ReplicaSet의 replicas 와 같은 개념이다.
 - **env:**: Master_IP, MODEL_WEIGHT, OUTPUT 환경변수를 사용하여 코드 수정 없이 yaml 파일만 수정할 수 있도록
 - **nvidia.com/gpu: 1**: 모델당 GPU 1개의 메모리면 충분 하기 때문에 **limits**을 걸어놓음
 - **volumes**: 영상이 있는 스토리지를 hostPath를 통해 마운트.
@@ -235,6 +236,24 @@ spec:
 
 ### 전처리 결과
 - 20개 영상(총 1시간) 전처리 -> 1시간 반 소모
+
+## 추가
+
+### 기존 worker.yaml
+```yaml
+limits:
+  nvidia.com/gpu:1
+```
+위와 같이 gpu를 한개로 제한을 해버리면 사용할 수 있는 **gpu 개수** 만큼만 **parallelism**를 선택할 수 있다. 따라서 GPU Share Scheduler ([GitHub](https://github.com/AliyunContainerService/gpushare-scheduler-extender))을 사용하였다.
+
+### 변경된 worker.yaml
+```yaml
+limits:
+  aliyun.com/gpu-mem: 3
+```
+- gpu-mem을 설정하여 pod들이 gpu를 공유하여 해당 memory 만큼만 사용.
+- 여기서 1은 1GB.
+- 전처리 시간 1/2 단축.
 
 ## References
 - [핵심만 콕! 쿠버네티스](http://www.yes24.com/Product/Goods/92426926)
