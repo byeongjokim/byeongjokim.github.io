@@ -199,7 +199,7 @@ spec:
         image: blur-worker:latest
         env:
         - name: MASTER_IP
-          value: "http://xxx.xxx.xxx.xxx:AAAA"
+          value: "http://blur-master-service:AAAA"
         - name: MODEL_WEIGHT
           value: "/MODEL/WEIGHT.pth"
         - name: OUTPUT
