@@ -3,7 +3,7 @@ layout: post
 title:  "MLOps - Toy Project #1"
 description: Kubeflow를 통한 MLOps Pipeline
 date:   2020-08-05 00:00:00 +0900
-categories: MLOps_Project
+categories: Project
 use_math: true
 ---
 

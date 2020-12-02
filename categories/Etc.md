@@ -1,4 +1,4 @@
 ---
 layout: category  
-title: MLOps_Project
+title: Etc
 ---

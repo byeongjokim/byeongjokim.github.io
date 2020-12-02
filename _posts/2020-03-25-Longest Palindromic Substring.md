@@ -3,7 +3,7 @@ layout: post
 title:  "LeetCode 05 - Longest Palindromic Substring"
 description: LeetCode - Top 100 Liked Questions
 date:   2020-03-31 20:03:00 +0900
-categories: Problems
+categories: Etc
 use_math: true
 ---
 

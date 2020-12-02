@@ -3,7 +3,7 @@ layout: post
 title:  "MLOps - Toy Project #2"
 description: Jenkins CI/CD using Docker
 date:   2020-08-14 00:00:00 +0900
-categories: MLOps_Project
+categories: Project
 use_math: true
 ---
 

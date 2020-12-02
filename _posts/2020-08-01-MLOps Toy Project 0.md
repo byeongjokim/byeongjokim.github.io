@@ -3,7 +3,7 @@ layout: post
 title:  "MLOps - Toy Project #0"
 description: Kubeflow를 통한 MLOps 버전 및 서버 정보
 date:   2020-08-01 00:00:00 +0900
-categories: MLOps_Project
+categories: Project
 use_math: true
 ---
 

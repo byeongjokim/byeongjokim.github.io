@@ -3,7 +3,7 @@ layout: post
 title:  "LeetCode 03 - Longest Substring Without Repeating Characters"
 description: LeetCode - Top 100 Liked Questions
 date:   2020-03-27 20:03:00 +0900
-categories: Problems
+categories: Etc
 use_math: true
 ---
 문자열이 주어지면 그 중에서 가장 긴 substring을 찾는 문제이다. 밑 예제에도 있듯이 subsequence가 아닌 substring을 찾아야 한다.
