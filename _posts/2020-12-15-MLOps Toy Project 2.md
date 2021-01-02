@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "거대한 데이터인 척 하는 Mnist!, MLOps 구축하기 #2"
+title:  "거대한 데이터인 척, mnist로 MLOps 구축하기 #2"
 description: CI/CD using Github Action
 date:   2020-12-15 00:00:00 +0900
 categories: MLOps
