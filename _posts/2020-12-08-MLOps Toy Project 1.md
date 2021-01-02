@@ -3,7 +3,7 @@ layout: post
 title:  "거대한 데이터인 척 하는 Mnist!, MLOps 구축하기 #1"
 description: MLOps System Design
 date:   2020-12-08 00:00:00 +0900
-categories: Project
+categories: MLOps
 use_math: true
 ---
 
