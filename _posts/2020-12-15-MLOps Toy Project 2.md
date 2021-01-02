@@ -13,7 +13,7 @@ use_math: true
 
 ![pipeline](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/mlops2/pipeline.png){: width="100%"}
 
-이 포스팅에는 위의 단계인 CI - CD에 관련된 내용을 담고 있다.
+이 포스팅에는 위의 CI - CD 단계에 관련된 내용을 담고 있다.
 
 ## Github Action
 이 프로젝트는 Gtihub을 통해 관리 되었으며, Jenkins를 사용하여 CI/CD를 구축 하려다가 평소에 써보고 싶었던 Github Action을 사용하기로 결정하였다. 깃헙 메뉴의 Actions을 통해 이를 설정할 수 있다. 각 Workflows는 YML 파일을 통해 관리가 가능하며, 이 프로젝트에서는 **CI**, **CD** 두 workflow을 설정하였다. 
@@ -22,7 +22,7 @@ use_math: true
 
 ### CI
 
-```YML
+```yaml
 on:
   push:
     branches: [ main ]
@@ -32,7 +32,7 @@ on:
 
 CI workflow는 main brunch 로 push가 될 때 발생하는 workflow 이다. 위 코드부분과 같이 **on**으로 설정할 수 있다. push, pull_requets 뿐만 아니라 workflow_run 을 통해 타 workflow의 상태를 trigger로 사용할 수도 있다.
 
-```YML
+```yaml
 build:
     runs-on: ubuntu-latest
     steps:          
@@ -56,7 +56,7 @@ CI workflow 에서는 docker 이미지를 빌드 후 push 하는 과정이 이�
 
 ![github action](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/mlops2/githubaction2.PNG){: width="100%"}
 
-```YML
+```yaml
       - name: Slack Notification
         if: always()
         uses: rtCamp/action-slack-notify@v2
@@ -70,7 +70,7 @@ CI workflow 에서는 docker 이미지를 빌드 후 push 하는 과정이 이�
 
 그리고 CI의 결과를 Slack으로 알릴 수 있다. 실패할 때도 알려야 하기 때문에, **if: always()**를 설정하였다. 전체 CI Workflow YML 파일은 아래와 같다.
 
-```YML
+```yaml
 name: CI
 
 on:
@@ -111,7 +111,7 @@ jobs:
 
 ### CD
 
-```YML
+```yaml
 on:
   workflow_run:
     workflows: ["ci"]
@@ -122,7 +122,7 @@ on:
 
 CD Workflow의 경우 ci worfklow가 완료 된 후 시작이 된다.
 
-```YML
+```yaml
       - uses: actions/setup-python@v2
         with:
           python-version: '3.6.12'
@@ -139,7 +139,7 @@ CD Workflow의 경우 ci worfklow가 완료 된 후 시작이 된다.
 
 우선 kubeflow pipeline python SDK를 실행하기 위해 kfp를 설치하였다. 그 후 배포는 **python kubeflow_pipeline/pipeline.py** 로 이루어진다. 다음 포스팅에서 설명하겠지만 pipeline.py를 실행하면 자동으로 지정된 서버의 kubeflow로 pipeline으로 업로드(배포) 되도록 개발이 되어있다. CD workflow에도 마찬가지로 Slack으로 상태를 알리도록 하였다. 다음은 CD Workflow YML 파일의 전체이다.
 
-```YML
+```yaml
 name: CD
 
 on:
