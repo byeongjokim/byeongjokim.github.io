@@ -7,6 +7,10 @@ categories: MLOps
 use_math: true
 ---
 
+- [프로젝트 소개 및 정보](https://byeongjokim.github.io/posts/MLOps-Toy-Project-0/)
+- [MLOps System Design](https://byeongjokim.github.io/posts/MLOps-Toy-Project-1/)
+- [CI/CD using Github Action](https://byeongjokim.github.io/posts/MLOps-Toy-Project-2/)
+
 ![pipeline](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/mlops2/pipeline.png){: width="100%"}
 
 이 포스팅에는 위의 단계인 CI - CD에 관련된 내용을 담고 있다.
