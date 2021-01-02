@@ -68,6 +68,8 @@ CI workflow 에서는 docker 이미지를 빌드 후 push 하는 과정이 이�
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
 ```
 
+![slack](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/mlops2/slack.PNG){: width="100%"}
+
 그리고 CI의 결과를 Slack으로 알릴 수 있다. 실패할 때도 알려야 하기 때문에, **if: always()**를 설정하였다. 전체 CI Workflow YML 파일은 아래와 같다.
 
 ```yaml
@@ -183,6 +185,7 @@ jobs:
 ![github action](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/mlops2/githubaction3.PNG){: width="100%"}
 
 CI 또는 CD의 Workflow는 위와 같이 단계별로 에러와 상태를 확인 할 수 있다. 
+
 
 이 프로젝트는 위의 CI와 CD를 통해 파이프라인이 배포가 되며 학습이 이루어진다. 다음 포스팅에서는 kubeflow pipeline을 이용한 학습에 대한 내용을 나눠서 올릴 예정이다.
 
