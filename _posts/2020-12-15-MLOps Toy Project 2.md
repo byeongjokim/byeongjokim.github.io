@@ -180,7 +180,7 @@ jobs:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
 ```
 
-![github action](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/mlops2/githubaction2.PNG){: width="100%"}
+![github action](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/mlops2/githubaction3.PNG){: width="100%"}
 
 CI 또는 CD의 Workflow는 위와 같이 단계별로 에러와 상태를 확인 할 수 있다. 
 
