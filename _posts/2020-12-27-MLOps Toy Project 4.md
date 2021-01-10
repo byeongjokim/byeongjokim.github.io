@@ -14,4 +14,4 @@ use_math: true
 - [CT using Kubeflow pipelines - 2](https://byeongjokim.github.io/posts/MLOps-Toy-Project-4/)
 
 ## References
-- 
+- kubernetes client [url](https://github.com/kubernetes-client/python/tree/master/kubernetes/docs)

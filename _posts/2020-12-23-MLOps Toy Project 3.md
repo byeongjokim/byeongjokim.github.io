@@ -86,4 +86,7 @@ CT 파이프라인을 구현하면서 배포 과정(KFServing) 개발중 버전 
 각각 스텝의 pvc, 순서, output 등의 설정은 다음 포스팅에서 소개할 예정이다.
 
 ## References
-- kubernetes client [url](https://github.com/kubernetes-client/python/tree/master/kubernetes/docs)
+- [kfp](https://kubeflow-pipelines.readthedocs.io/en/stable/source/kfp.dsl.html)
+- [KFServing](https://github.com/kubeflow/kfserving)
+- [pipelines](https://github.com/kubeflow/pipelines)
+- [kubeflow v1.2 설치](https://gist.github.com/etheleon/80414516c7fbc7147a5718b9897b1518#install-microk8s)
