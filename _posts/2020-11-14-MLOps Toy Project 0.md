@@ -23,8 +23,8 @@ use_math: true
 아래는 사용하고 있는 서버 환경과 프로그램 정보이며, 평소에 관심이 있는 오픈소스를 위주로(e.x., Github Action) 사용하였다.
 
 ## Server
-- Minikube v1.15.1 ([How to Install](https://www.kubeflow.org/docs/started/workstation/minikube-linux/#install-minikube))
-- Kubeflow v1.0.0 ([How to Install](https://byeongjokim.github.io/posts/install-kubeflow/))
+- microk8s v1.19.0
+- Kubeflow v1.2.0 ([How to Install v1.2](https://gist.github.com/etheleon/80414516c7fbc7147a5718b9897b1518))
 
 ## CI/CD/CT/Monitoring/Logging
 - Github (Gtihub Action)
@@ -33,7 +33,6 @@ use_math: true
 - Kubeflow
     - pipelines (kfp)
     - Katib
-    - KFServing
 - TorchServe
 - EKF
 
