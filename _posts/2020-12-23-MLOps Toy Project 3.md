@@ -65,7 +65,6 @@ CT 파이프라인을 구현하면서 배포 과정(KFServing) 개발중 버전 
     - 고려:
         - faiss index: **faiss_index.bin** 저장
         - embedding과 매칭되는 label: **faiss_label.json** 저장
-    - embedded 데이터로 faiss 학습
 - 5_analysis_model
     - 기능:
         - 전체 모델(embedding + faiss) 성능 평가

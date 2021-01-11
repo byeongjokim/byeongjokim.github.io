@@ -19,7 +19,8 @@ use_math: true
 - Deadline: 약 **2주**
 
 ## Solving
-- Kubernetes 사용
+- Kubernetes 서버 사용
+    - 여러개의 GPU 달린 서버
 - Service, Job을 이용하여 Master, Worker 구현
     - Master: 남은 일 체크 및 일 분배
     - Worker: 받은 일 처리 완료 후 일 요청
