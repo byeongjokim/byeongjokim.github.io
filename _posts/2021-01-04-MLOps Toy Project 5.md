@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  "거대한 데이터인 척, mnist로 MLOps 구축하기 #6"
-description: Monitoring using Prometheus
-date:   2020-01-10 00:00:00 +0900
+title:  "거대한 데이터인 척, mnist로 MLOps 구축하기 #5"
+description: Serving TorchServe in kubeflow pipelines
+date:   2021-01-04 00:00:00 +0900
 categories: MLOps
 use_math: true
 ---
