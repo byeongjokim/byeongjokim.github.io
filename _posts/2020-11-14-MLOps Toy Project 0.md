@@ -12,6 +12,8 @@ use_math: true
 - [CI/CD using Github Action](https://byeongjokim.github.io/posts/MLOps-Toy-Project-2/)
 - [CT using Kubeflow pipelines - 1](https://byeongjokim.github.io/posts/MLOps-Toy-Project-3/)
 - [CT using Kubeflow pipelines - 2](https://byeongjokim.github.io/posts/MLOps-Toy-Project-4/)
+- [Serving TorchServe in kubeflow pipelines](https://byeongjokim.github.io/posts/MLOps-Toy-Project-5/)
+- [Monitoring using Prometheus](https://byeongjokim.github.io/posts/MLOps-Toy-Project-6/)
 
 클러스터 환경의 서버를 이용한 모델 학습을 하기 위해 쿠버네티스(Kubernetes)와 쿠버플로우(Kubeflow)를 처음 접하게 되었다. 컴퓨터 네트워크라는 분야에 매우 약하기 때문에 공부하기가 쉽지 않았다. 하지만 찾아볼 수록 너무 매력적인 이야기들이고, MLOps라는 분야에 대해 큰 관심이 생겼다. 그러던 와중 회사일로 인해 CI/CD를 경험해보며 MLOps에 더욱 빠져들었다. 어떤 것이든지 직접 해봐야 공부가 되는 성격이라 local 부터 배포까지 전 MLOps 과정을 구축해보았다. 
 

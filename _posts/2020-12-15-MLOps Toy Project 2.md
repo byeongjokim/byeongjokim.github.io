@@ -12,6 +12,8 @@ use_math: true
 - [CI/CD using Github Action](https://byeongjokim.github.io/posts/MLOps-Toy-Project-2/)
 - [CT using Kubeflow pipelines - 1](https://byeongjokim.github.io/posts/MLOps-Toy-Project-3/)
 - [CT using Kubeflow pipelines - 2](https://byeongjokim.github.io/posts/MLOps-Toy-Project-4/)
+- [Serving TorchServe in kubeflow pipelines](https://byeongjokim.github.io/posts/MLOps-Toy-Project-5/)
+- [Monitoring using Prometheus](https://byeongjokim.github.io/posts/MLOps-Toy-Project-6/)
 
 ![pipeline](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/mlops2/pipeline.png){: width="100%"}
 
