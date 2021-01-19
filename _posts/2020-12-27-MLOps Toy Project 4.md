@@ -12,8 +12,9 @@ use_math: true
 - [CI/CD using Github Action](https://byeongjokim.github.io/posts/MLOps-Toy-Project-2/)
 - [CT using Kubeflow pipelines - 1](https://byeongjokim.github.io/posts/MLOps-Toy-Project-3/)
 - [CT using Kubeflow pipelines - 2](https://byeongjokim.github.io/posts/MLOps-Toy-Project-4/)
-- [Serving TorchServe in kubeflow pipelines](https://byeongjokim.github.io/posts/MLOps-Toy-Project-5/)
-- [Monitoring using Prometheus](https://byeongjokim.github.io/posts/MLOps-Toy-Project-6/)
+- [Serving TorchServe in kubeflow pipelines - 1](https://byeongjokim.github.io/posts/MLOps-Toy-Project-5/)
+- [Serving TorchServe in kubeflow pipelines - 2](https://byeongjokim.github.io/posts/MLOps-Toy-Project-6/)
+- [Trigger using Slack](https://byeongjokim.github.io/posts/MLOps-Toy-Project-7/)
 
 ![pipeline](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/mlops3/pipeline.png){: width="60%"}
 
@@ -212,20 +213,20 @@ def mnist_pipeline():
         .apply(onprem.mount_pvc("deploy-model-pvc", volume_name="deploy-model", volume_mount_path="/deploy-model"))
 
 if __name__=="__main__":
-    host = "http://220.116.228.93:8080/pipeline"
+    host = "http://xxx.xxx.xxx.xxx:xxxx/pipeline"
     namespace = "kbj"
     
     pipeline_name = "Mnist"
     pipeline_package_path = "pipeline.zip"
-    version = "v0.1"
+    version = "v0.2"
 
     experiment_name = "For Develop"
-    run_name = "from collecting data to deploy"
+    run_name = "serving version {}".format(version)
 
     client = kfp.Client(host=host, namespace=namespace)
     kfp.compiler.Compiler().compile(mnist_pipeline, pipeline_package_path)
 
-    pipeline_id = client.get_pipeline_id("Mnist")
+    pipeline_id = client.get_pipeline_id(pipeline_name)
     if pipeline_id:
         client.upload_pipeline_version(pipeline_package_path=pipeline_package_path, pipeline_version_name=version, pipeline_name=pipeline_name)
     else:

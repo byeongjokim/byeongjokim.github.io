@@ -12,8 +12,9 @@ use_math: true
 - [CI/CD using Github Action](https://byeongjokim.github.io/posts/MLOps-Toy-Project-2/)
 - [CT using Kubeflow pipelines - 1](https://byeongjokim.github.io/posts/MLOps-Toy-Project-3/)
 - [CT using Kubeflow pipelines - 2](https://byeongjokim.github.io/posts/MLOps-Toy-Project-4/)
-- [Serving TorchServe in kubeflow pipelines](https://byeongjokim.github.io/posts/MLOps-Toy-Project-5/)
-- [Monitoring using Prometheus](https://byeongjokim.github.io/posts/MLOps-Toy-Project-6/)
+- [Serving TorchServe in kubeflow pipelines - 1](https://byeongjokim.github.io/posts/MLOps-Toy-Project-5/)
+- [Serving TorchServe in kubeflow pipelines - 2](https://byeongjokim.github.io/posts/MLOps-Toy-Project-6/)
+- [Trigger using Slack](https://byeongjokim.github.io/posts/MLOps-Toy-Project-7/)
 
 ## System Design
 [ml-system-design-pattern](https://mercari.github.io/ml-system-design-pattern/)와 [MLOps](https://cloud.google.com/solutions/machine-learning/mlops-continuous-delivery-and-automation-pipelines-in-machine-learning)를 참고하여 이 프로젝트의 전체 시스템을 설계하였다.
