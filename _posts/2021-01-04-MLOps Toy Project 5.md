@@ -50,6 +50,8 @@ torch-model-archiver의 중요한 Arguments는 다음과 같다.
     - 함께 압축되어야하는 파일
 - --export-path
     - mar 파일이 저장될 경로
+- --requirements-file
+    - TorchServe 할때 필요한 python package
 
 본 프로젝트는 이미지를 임베딩 한 후 faiss를 사용하여 예측 하기 때문에, handler를 custom 하였다.
 
@@ -150,10 +152,10 @@ def handle(data, context):
 위에서 만든 MyHandler을 **handler.py**에서 선언하고, 들어온 data를 차례로 넘겨준다.
 
 ```
-torch-model-archiver --model-name embedding --version 1.0 --serialized-file model.pt --extra-files MyHandler.py,faiss_index.bin,faiss_label.json --handler handler.py
+torch-model-archiver --model-name embedding --version 1.0 --serialized-file model.pt --extra-files MyHandler.py,faiss_index.bin,faiss_label.json --handler handler.py --requirements-file requirements.txt
 ```
 
-위는 torch-model-archiver을 실행하는 커맨드이다. **MyHandler.py, faiss_index.bin, faiss_label.json** 은 handler.py가 실행될 때 필요하기 때문에 extra-files 옵션에 넣어주었다. 비로서 torch **모델이 압축된 mar 파일**을 생성하게 된다.
+위는 torch-model-archiver을 실행하는 커맨드이다. **MyHandler.py, faiss_index.bin, faiss_label.json** 은 handler.py가 실행될 때 필요하기 때문에 extra-files 옵션에 넣어주었다. 마지막으로 faiss와 numpy를 사용하기 때문에 --requirements-file 옵션을 사용하여 파이썬 패키지를 설치하도록 한다. 비로서 torch **모델이 압축된 mar 파일**을 생성하게 된다. 
 
 다음 포스팅에는 생성된 mar 파일을 통해 deploy 하는 TorchServe와 kubeflow 파이프라인에서 이를 deploy 하는 코드를 소개한다.
 
