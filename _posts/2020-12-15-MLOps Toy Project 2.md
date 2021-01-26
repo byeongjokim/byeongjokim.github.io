@@ -38,6 +38,7 @@ on:
 CI workflow는 main brunch 로 push가 될 때 발생하는 workflow 이다. 위 코드부분과 같이 **on**으로 설정할 수 있다. push, pull_requets 뿐만 아니라 workflow_run 을 통해 타 workflow의 상태를 trigger로 사용할 수도 있다.
 
 ```yaml
+{% raw %}
 build:
     runs-on: ubuntu-latest
     steps:          
@@ -55,6 +56,7 @@ build:
           docker build kubeflow_pipeline/0_data -t byeongjokim/mnist-pre-data
           docker push byeongjokim/mnist-pre-data
           (중략)
+{% endraw %}
 ```
 
 CI workflow 에서는 docker 이미지를 빌드 후 push 하는 과정이 이루어진다. github action의 장점으로는 여러가지 오픈소스 actions들을 사용할 수 있다. [url](https://github.com/marketplace?type=actions)에서 사용하고 싶은 action을 검색 후 **uses**를 통해 사용이 가능하다.
@@ -62,6 +64,7 @@ CI workflow 에서는 docker 이미지를 빌드 후 push 하는 과정이 이�
 ![github action](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/mlops2/githubaction2.PNG){: width="100%"}
 
 ```yaml
+{% raw %}
       - name: Slack Notification
         if: always()
         uses: rtCamp/action-slack-notify@v2
@@ -71,6 +74,7 @@ CI workflow 에서는 docker 이미지를 빌드 후 push 하는 과정이 이�
           SLACK_MESSAGE: 'Build/Push Images :building_construction: - ${{job.status}}'
           SLACK_USERNAME: Github
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+{% endraw %}
 ```
 
 ![slack](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/mlops2/slack.PNG){: width="100%"}
@@ -78,6 +82,7 @@ CI workflow 에서는 docker 이미지를 빌드 후 push 하는 과정이 이�
 그리고 CI의 결과를 Slack으로 알릴 수 있다. 실패할 때도 알려야 하기 때문에, **if: always()**를 설정하였다. 전체 CI Workflow YML 파일은 아래와 같다.
 
 ```yaml
+{% raw %}
 name: CI
 
 on:
@@ -114,6 +119,7 @@ jobs:
           SLACK_MESSAGE: 'Build/Push Images :building_construction: - ${{job.status}}'
           SLACK_USERNAME: Github
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+{% endraw %}
 ```
 
 ### CD
@@ -147,6 +153,7 @@ CD Workflow의 경우 ci worfklow가 완료 된 후 시작이 된다.
 우선 kubeflow pipeline python SDK를 실행하기 위해 kfp를 설치하였다. 그 후 배포는 **python kubeflow_pipeline/pipeline.py** 로 이루어진다. 다음 포스팅에서 설명하겠지만 pipeline.py를 실행하면 자동으로 지정된 서버의 kubeflow로 pipeline으로 업로드(배포) 되도록 개발이 되어있다. CD workflow에도 마찬가지로 Slack으로 상태를 알리도록 하였다. 다음은 CD Workflow YML 파일의 전체이다.
 
 ```yaml
+{% raw %}
 name: CD
 
 on:
@@ -185,6 +192,7 @@ jobs:
           SLACK_MESSAGE: 'Upload & Run pipeline :rocket: - ${{job.status}}'
           SLACK_USERNAME: Github
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+{% endraw %}
 ```
 
 ![github action](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/mlops2/githubaction3.PNG){: width="100%"}
