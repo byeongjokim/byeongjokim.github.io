@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  "거대한 데이터인 척, mnist로 MLOps 구축하기 #6"
-description: Serving TorchServe in kubeflow pipelines - 2
+title:  "Serving TorchServe in kubeflow pipelines - 2"
+description: "거대한 데이터인 척, mnist로 MLOps 구축하기 #6"
 date:   2021-01-10 00:00:00 +0900
 categories: MLOps
 use_math: true

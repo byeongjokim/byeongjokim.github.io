@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  "거대한 데이터인 척, mnist로 MLOps 구축하기 #0"
-description: 프로젝트 소개 및 정보
+title:  "MLOps Toy 프로젝트 소개"
+description: "거대한 데이터인 척, mnist로 MLOps 구축하기 #0"
 date:   2020-11-14 00:00:00 +0900
 categories: MLOps
 use_math: true

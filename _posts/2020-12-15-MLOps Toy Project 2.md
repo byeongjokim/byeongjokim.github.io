@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  "거대한 데이터인 척, mnist로 MLOps 구축하기 #2"
-description: CI/CD using Github Action
+title:  "CI/CD using Github Action"
+description: "거대한 데이터인 척, mnist로 MLOps 구축하기 #2"
 date:   2020-12-15 00:00:00 +0900
 categories: MLOps
 use_math: true

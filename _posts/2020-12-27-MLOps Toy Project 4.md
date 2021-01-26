@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  "거대한 데이터인 척, mnist로 MLOps 구축하기 #4"
-description: CT using Kubeflow pipelines - 2
+title:  "CT using Kubeflow pipelines - 2"
+description: "거대한 데이터인 척, mnist로 MLOps 구축하기 #4"
 date:   2020-12-27 00:00:00 +0900
 categories: MLOps
 use_math: true

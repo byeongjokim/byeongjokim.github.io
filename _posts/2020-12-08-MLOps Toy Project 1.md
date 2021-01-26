@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  "거대한 데이터인 척, mnist로 MLOps 구축하기 #1"
-description: MLOps System Design
+title:  "MLOps System Design"
+description: "거대한 데이터인 척, mnist로 MLOps 구축하기 #1"
 date:   2020-12-08 00:00:00 +0900
 categories: MLOps
 use_math: true
@@ -17,9 +17,9 @@ use_math: true
 - [Trigger using Slack](https://byeongjokim.github.io/posts/MLOps-Toy-Project-7/)
 
 ## System Design
-[ml-system-design-pattern](https://mercari.github.io/ml-system-design-pattern/)와 [MLOps](https://cloud.google.com/solutions/machine-learning/mlops-continuous-delivery-and-automation-pipelines-in-machine-learning)를 참고하여 이 프로젝트의 전체 시스템을 설계하였다.
-
 ![pipeline](https://raw.githubusercontent.com/byeongjokim/byeongjokim.github.io/master/assets/images/mlops1/pipeline.png){: width="100%"}
+
+[ml-system-design-pattern](https://mercari.github.io/ml-system-design-pattern/)와 [MLOps](https://cloud.google.com/solutions/machine-learning/mlops-continuous-delivery-and-automation-pipelines-in-machine-learning)를 참고하여 이 프로젝트의 전체 시스템을 설계하였다.
 
 설계하면서 가장 중점에 둔 것은 **CT pipelines** 이다. 일반적인 DevOps와 달리 MLOps는 CT라는 과정을 거쳐야한다. 이에 다섯가지 필수 구성요소를 집어넣었다. [URL](https://growingdata.com.au/mlops-ci-cd-for-machine-learning-pipelines-model-deployment-with-kubeflow/?preview=true&_thumbnail_id=5121)
 - Prepare & Integrate Data
